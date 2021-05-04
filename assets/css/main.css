@@ -3240,8 +3240,9 @@ input, select, textarea {
 		}
 
 		.wrapper.style1 {
-			background-image: url(../../images/flowers.jpg);
-			background-position: 90% 60%;
+			background-size: 100% 100%;
+			background-image: url(../../images/pinkflower.jpg);
+			background-position: 60% 100%;
 			background-color: #493382;
 		}
 
@@ -3871,7 +3872,7 @@ input, select, textarea {
 			}
 
 		}
-
+å
 /* Intro */
 
 	#intro {
@@ -3879,7 +3880,8 @@ input, select, textarea {
 		background-image: url("../../images/pinkflower.jpg");
 		background-position: top right;
 		background-repeat: no-repeat;
-		background-size: 100%;
+		background-size: 100% 100%;
+		
 	}
 
 		#intro p {
