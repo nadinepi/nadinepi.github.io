@@ -3241,10 +3241,10 @@ input, select, textarea {
 
 		.wrapper.style1 {
 			background-attachment: fixed;
-			background-size: 120% auto;
+			background-size: 120%;
 			background-repeat: no-repeat;
 			background-image: url(../../images/pinkflower.jpg);
-			background-position: 0% 60%;
+			background-position: 0% 30%;
 			background-color: #493382;
 		}
 
