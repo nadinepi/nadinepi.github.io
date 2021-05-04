@@ -3240,9 +3240,11 @@ input, select, textarea {
 		}
 
 		.wrapper.style1 {
-			background-size: 100% 100%;
+			background-attachment: fixed;
+			background-size: 120% auto;
+			background-repeat: no-repeat;
 			background-image: url(../../images/pinkflower.jpg);
-			background-position: 60% 100%;
+			background-position: 0% 60%;
 			background-color: #493382;
 		}
 
