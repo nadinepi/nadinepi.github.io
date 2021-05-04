@@ -3244,7 +3244,7 @@ input, select, textarea {
 			background-size: 120%;
 			background-repeat: no-repeat;
 			background-image: url(../../images/pinkflower.jpg);
-			background-position: 0% 30%;
+			background-position: -17% 30%;
 			background-color: #493382;
 		}
 
@@ -4001,5 +4001,48 @@ input, select, textarea {
 		.project__image {
 			margin-left: -50%;
 	   }
+
+
+	   .typewriter {
+		font-family: "Monaco", Cursive;
+		display: inline-block;
+		font-size: 15px;
+	}
+	
+	.typewriter-text {
+		display: inline-block;
+		overflow: hidden;
+		letter-spacing: 2px;
+		animation: typing 3s steps(27, end), blink .75s step-end infinite;
+		white-space: nowrap;
+		font-size: 5px;
+		font-weight: 700;
+		border-right: 4px solid white;
+		box-sizing: border-box;
+	}
+	
+	@keyframes typing {
+		from { 
+			width: 0% 
+		}
+		to { 
+			width: 100% 
+		}
+	}
+	
+	@keyframes blink {
+		from, to { 
+			border-color: transparent 
+		}
+		50% { 
+			border-color: white; 
+		}
+	}
+
+	.name {
+		font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+		padding-bottom: 0%;
+		margin-bottom: 0%;
+	}
 		
  
