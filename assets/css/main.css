@@ -3240,6 +3240,7 @@ input, select, textarea {
 		}
 
 		.wrapper.style1 {
+			object-fit: cover;
 			background-image: url(../../images/flowers.jpg);
 			background-position: 90% 60%;
 			background-color: #493382;
