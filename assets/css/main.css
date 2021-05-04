@@ -3262,6 +3262,8 @@ input, select, textarea {
 
 		.wrapper.style3 {
 			background-color: #9c9c9c34;
+			margin-bottom: 0%;
+			padding-bottom: 0%;
 		}
 
 		.wrapper.style3-alt {
@@ -4044,5 +4046,10 @@ input, select, textarea {
 		padding-bottom: 0%;
 		margin-bottom: 0%;
 	}
-		
+
+	.python {
+		background-color:rgba(0, 0, 0, 0.41);
+		padding-bottom: 0.1%;
+	}
+
  
