@@ -4005,7 +4005,7 @@ input, select, textarea {
 
 
 	   .typewriter {
-		font-family: "Monaco", Cursive;
+		font-family: 'Monaco', 'Trebuchet MS', 'Verdana', Cursive;
 		display: inline-block;
 		font-size: 15px;
 	}
