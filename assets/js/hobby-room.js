@@ -1,55 +1,70 @@
-// Cute pixel art room for hobbies section
-// Character movement and interaction logic
+// Cute pixel room for hobbies section
+// This script creates a simple interactive room with a character that can move between hobby spots.
 
-const room = document.getElementById('hobby-room');
-const char = document.getElementById('hobby-character');
-const blurbs = {
-  skateboard: 'I love skateboarding! It keeps me active and is just pure fun.',
-  climbing: 'Climbing is my favorite way to challenge myself and enjoy the outdoors.',
-  art: 'I enjoy painting and drawing in my free time!'
-};
-const blurbBox = document.getElementById('hobby-blurb');
-
-// Positions for each hobby (in grid units)
-const hobbySpots = {
-  skateboard: {x: 1, y: 2},
-  climbing: {x: 3, y: 1},
-  art: {x: 4, y: 3}
+const room = {
+  width: 600,
+  height: 250,
+  spots: [
+    { name: 'skateboard', x: 80, y: 140, img: 'skateboard.png', blurb: 'I love skateboarding! It keeps me active and is super fun.' },
+    { name: 'climbing', x: 270, y: 80, img: 'climbing.png', blurb: 'Climbing is my favorite way to challenge myself and stay fit.' },
+    { name: 'art', x: 480, y: 150, img: 'art.png', blurb: 'I enjoy painting and drawing in my free time.' }
+  ],
+  character: { x: 50, y: 200, img: 'character.png', size: 40 }
 };
 
-// Character position (in grid units)
-let charPos = {x: 2, y: 3};
+let currentSpot = null;
 
-function updateCharPos() {
-  char.style.left = (charPos.x * 64) + 'px';
-  char.style.top = (charPos.y * 64) + 'px';
-  // Check for hobby collision
-  for (const [hobby, pos] of Object.entries(hobbySpots)) {
-    if (charPos.x === pos.x && charPos.y === pos.y) {
-      blurbBox.textContent = blurbs[hobby];
-      blurbBox.style.opacity = 1;
-      return;
+function drawRoom(ctx) {
+  ctx.clearRect(0, 0, room.width, room.height);
+  // Draw floor
+  ctx.fillStyle = '#ffe0ef';
+  ctx.fillRect(0, 0, room.width, room.height);
+  // Draw spots
+  room.spots.forEach(spot => {
+    const img = document.getElementById('img-' + spot.name);
+    if (img) ctx.drawImage(img, spot.x, spot.y, 48, 48);
+  });
+  // Draw character
+  const charImg = document.getElementById('img-character');
+  if (charImg) ctx.drawImage(charImg, room.character.x, room.character.y, room.character.size, room.character.size);
+}
+
+function checkSpot() {
+  currentSpot = null;
+  room.spots.forEach(spot => {
+    if (Math.abs(room.character.x - spot.x) < 40 && Math.abs(room.character.y - spot.y) < 40) {
+      currentSpot = spot;
     }
+  });
+  const blurb = document.getElementById('hobby-blurb');
+  if (currentSpot) {
+    blurb.textContent = currentSpot.blurb;
+    blurb.style.opacity = 1;
+  } else {
+    blurb.textContent = '';
+    blurb.style.opacity = 0;
   }
-  blurbBox.style.opacity = 0;
 }
 
-function moveChar(dx, dy) {
-  const newX = Math.max(0, Math.min(4, charPos.x + dx));
-  const newY = Math.max(0, Math.min(4, charPos.y + dy));
-  charPos = {x: newX, y: newY};
-  updateCharPos();
+function moveCharacter(dx, dy) {
+  room.character.x = Math.max(0, Math.min(room.width - room.character.size, room.character.x + dx));
+  room.character.y = Math.max(0, Math.min(room.height - room.character.size, room.character.y + dy));
+  drawRoom(document.getElementById('hobby-canvas').getContext('2d'));
+  checkSpot();
 }
 
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'ArrowUp') moveChar(0, -1);
-  if (e.key === 'ArrowDown') moveChar(0, 1);
-  if (e.key === 'ArrowLeft') moveChar(-1, 0);
-  if (e.key === 'ArrowRight') moveChar(1, 0);
+document.addEventListener('DOMContentLoaded', function() {
+  const canvas = document.getElementById('hobby-canvas');
+  if (!canvas) return;
+  canvas.width = room.width;
+  canvas.height = room.height;
+  drawRoom(canvas.getContext('2d'));
+  checkSpot();
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'ArrowLeft') moveCharacter(-20, 0);
+    if (e.key === 'ArrowRight') moveCharacter(20, 0);
+    if (e.key === 'ArrowUp') moveCharacter(0, -20);
+    if (e.key === 'ArrowDown') moveCharacter(0, 20);
+  });
 });
-
-// For mobile: add on-screen buttons
-window.moveChar = moveChar;
-
-// Initial position
-updateCharPos();
