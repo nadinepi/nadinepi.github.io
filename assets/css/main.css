@@ -3770,7 +3770,7 @@ input, select, textarea {
 			letter-spacing: 0.1em;
 			line-height: 1.75;
 			outline: 0;
-			padding: 1.1em 0;
+			padding: 1.1em 1.5em 1.1em 0.8em;
 			position: relative;
 			text-decoration: none;
 			text-transform: none;
