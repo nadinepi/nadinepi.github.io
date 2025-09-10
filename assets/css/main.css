@@ -3268,21 +3268,21 @@ input, select, textarea {
 		}
 
 		.wrapper.style2 {
-			background-color: #292e2d;
+			background-color: #fff0f6;
 		}
 
 		.wrapper.style2-alt {
-			background-color: #ffffff1a;
+			background-color: #ffe0ef;
 		}
 
 		.wrapper.style3 {
-			background-color: #9c9c9c34;
+			background-color: #f9c6e0;
 			margin-bottom: 0%;
 			padding-bottom: 0%;
 		}
 
 		.wrapper.style3-alt {
-			background-color: #953d75;
+			background-color: #f7b6d2;
 		}
 
 		.wrapper.fullscreen {
@@ -3546,7 +3546,10 @@ input, select, textarea {
 
 	#sidebar {
 		padding: 2.5em 2.5em 0.5em 2.5em ;
-		background: #000000;
+		background: #ffe0ef;
+		border-top-right-radius: 2em;
+		border-bottom-right-radius: 2em;
+		box-shadow: 2px 0 16px 0 rgba(249,198,224,0.18);
 		cursor: default;
 		height: 100vh;
 		left: 0;
@@ -3557,6 +3560,7 @@ input, select, textarea {
 		top: 0;
 		width: 18em;
 		z-index: 10000;
+		font-family: 'Quicksand', 'Poppins', 'Comic Sans MS', cursive, sans-serif;
 	}
 
 		#sidebar > .inner {
@@ -3759,17 +3763,19 @@ input, select, textarea {
 			-ms-transition: color 0.2s ease;
 			transition: color 0.2s ease;
 			border: 0;
-			color: rgba(255, 255, 255, 0.35);
+			color: #d16ba5;
 			display: block;
-			font-size: 0.6em;
-			font-weight: bold;
-			letter-spacing: 0.25em;
+			font-size: 1em;
+			font-weight: 700;
+			letter-spacing: 0.1em;
 			line-height: 1.75;
 			outline: 0;
-			padding: 1.35em 0;
+			padding: 1.1em 0;
 			position: relative;
 			text-decoration: none;
-			text-transform: uppercase;
+			text-transform: none;
+			border-radius: 1em;
+			transition: background 0.2s, color 0.2s;
 		}
 
 			#sidebar nav a:before, #sidebar nav a:after {
@@ -3783,14 +3789,11 @@ input, select, textarea {
 			}
 
 			#sidebar nav a:before {
-				background: #47204d;
+				   background: #f9c6e0;
 			}
 
 			#sidebar nav a:after {
-				background-image: -moz-linear-gradient(to right, #28324d, #b74e91);
-				background-image: -webkit-linear-gradient(to right, #28324d, #b74e91);
-				background-image: -ms-linear-gradient(to right, #28324d, #b74e91);
-				background-image: linear-gradient(to right, #28324d, #b74e91);
+				   background-image: linear-gradient(to right, #ffe0ef, #f9c6e0);
 				-moz-transition: max-width 0.2s ease;
 				-webkit-transition: max-width 0.2s ease;
 				-ms-transition: max-width 0.2s ease;
@@ -3799,11 +3802,13 @@ input, select, textarea {
 			}
 
 			#sidebar nav a:hover {
-				color: rgba(255, 255, 255, 0.55);
+				   color: #fff;
+				   background: #e17ea3;
 			}
 
 			#sidebar nav a.active {
-				color: #ffffff;
+				   color: #fff;
+				   background: #d16ba5;
 			}
 
 				#sidebar nav a.active:after {
@@ -4021,30 +4026,27 @@ input, select, textarea {
 
 
 	   .typewriter {
-		font-family: 'Monaco', 'Trebuchet MS', 'Verdana', Cursive;
+		font-family: 'Quicksand', 'Poppins', 'Comic Sans MS', cursive, sans-serif;
 		display: inline-block;
-		font-size: 15px;
+		font-size: 1.5em;
+		margin-bottom: 1em;
 	}
 	
 	.typewriter-text {
 		display: inline-block;
 		overflow: hidden;
-		letter-spacing: 2px;
-		animation: typing 3s steps(27, end), blink .75s step-end infinite;
+		letter-spacing: 1.5px;
+		animation: typing 1.2s steps(7, end), blink .6s step-end infinite;
 		white-space: nowrap;
-		font-size: 5px;
+		font-size: 1.2em;
 		font-weight: 700;
-		border-right: 4px solid white;
+		border-right: 3px solid #e17ea3;
 		box-sizing: border-box;
 	}
 	
 	@keyframes typing {
-		from { 
-			width: 0% 
-		}
-		to { 
-			width: 100% 
-		}
+		from { width: 0ch; }
+		to { width: 6ch; }
 	}
 	
 	@keyframes blink {
@@ -4057,9 +4059,9 @@ input, select, textarea {
 	}
 
 	.name {
-		font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-		padding-bottom: 0%;
-		margin-bottom: 0%;
+		font-family: 'Quicksand', 'Poppins', 'Comic Sans MS', cursive, sans-serif;
+		margin-bottom: 1.2em;
+		display: block;
 	}
 
 	.python {
