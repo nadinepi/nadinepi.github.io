@@ -61,10 +61,30 @@ document.addEventListener('DOMContentLoaded', function() {
   drawRoom(canvas.getContext('2d'));
   checkSpot();
 
+  let controlsEnabled = false;
+  const overlay = document.getElementById('hobby-room-overlay');
+  const startBtn = document.getElementById('hobby-room-start');
+  if (overlay && startBtn) {
+    overlay.style.display = 'block';
+    startBtn.style.display = 'inline-block';
+    startBtn.addEventListener('click', function() {
+      controlsEnabled = true;
+      overlay.style.display = 'none';
+      startBtn.style.display = 'none';
+      canvas.focus();
+    });
+  } else {
+    controlsEnabled = true;
+  }
+
   document.addEventListener('keydown', function(e) {
-    if (e.key === 'ArrowLeft') moveCharacter(-20, 0);
-    if (e.key === 'ArrowRight') moveCharacter(20, 0);
-    if (e.key === 'ArrowUp') moveCharacter(0, -20);
-    if (e.key === 'ArrowDown') moveCharacter(0, 20);
+    if (!controlsEnabled) return;
+    if (["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"].includes(e.key)) {
+      e.preventDefault();
+      if (e.key === 'ArrowLeft') moveCharacter(-20, 0);
+      if (e.key === 'ArrowRight') moveCharacter(20, 0);
+      if (e.key === 'ArrowUp') moveCharacter(0, -20);
+      if (e.key === 'ArrowDown') moveCharacter(0, 20);
+    }
   });
 });
