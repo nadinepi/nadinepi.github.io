@@ -5,11 +5,11 @@ const room = {
   width: 600,
   height: 250,
   spots: [
-    { name: 'skateboard', x: 80, y: 140, img: 'hobby-skateboard.png', blurb: 'I love skateboarding! It keeps me active and is super fun.', size: 48 },
-    { name: 'climbing', x: 270, y: 80, img: 'hobby-climbing.png', blurb: 'Climbing is my favorite way to challenge myself and stay fit.', size: 48 },
+    { name: 'skateboard', x: 80, y: 140, img: 'hobby-skateboard.png', blurb: 'I love skateboarding! It keeps me active and is super fun.', size: 150 },
+    { name: 'climbing', x: 270, y: 80, img: 'hobby-climbing.png', blurb: 'Climbing is my favorite way to challenge myself and stay fit.', size: 100 },
     { name: 'art', x: 480, y: 150, img: 'hobby-art.png', blurb: 'I enjoy painting and drawing in my free time.', size: 48 }
   ],
-  character: { x: 50, y: 200, img: 'hobby-character.png', size: 40 }
+  character: { x: 50, y: 200, img: 'hobby-character.png', size: 200 }
 };
 
 // Shared, scaled drawing context (set in DOMContentLoaded)
