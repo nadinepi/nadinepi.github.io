@@ -5,16 +5,24 @@ const room = {
   width: 600,
   height: 250,
   spots: [
-    { name: 'skateboard', x: 80, y: 140, img: 'hobby-skateboard.png', blurb: 'I love skateboarding! It keeps me active and is super fun.', size: 300 },
-    { name: 'climbing', x: 270, y: 80, img: 'hobby-climbing.png', blurb: 'Climbing is my favorite way to challenge myself and stay fit.', size: 100 },
-    { name: 'art', x: 480, y: 150, img: 'hobby-art.png', blurb: 'I enjoy painting and drawing in my free time.', size: 100 }
+    { name: 'skateboard', x: 80, y: 140, img: 'hobby-skateboard.png', blurb: 'I love skateboarding! It keeps me active and is super fun.', size: 48 },
+    { name: 'climbing', x: 270, y: 80, img: 'hobby-climbing.png', blurb: 'Climbing is my favorite way to challenge myself and stay fit.', size: 48 },
+    { name: 'art', x: 480, y: 150, img: 'hobby-art.png', blurb: 'I enjoy painting and drawing in my free time.', size: 48 }
   ],
-  character: { x: 50, y: 200, img: 'hobby-character.png', size: 300 }
+  character: { x: 50, y: 200, img: 'hobby-character.png', size: 40 }
 };
+
+// Shared, scaled drawing context (set in DOMContentLoaded)
+let hobbyCtx = null;
 
 let currentSpot = null;
 
 function drawRoom(ctx) {
+  // Allow calling without passing ctx - use shared hobbyCtx
+  ctx = ctx || hobbyCtx;
+  if (!ctx) return;
+  // Ensure pixel-art stays sharp
+  ctx.imageSmoothingEnabled = false;
   ctx.clearRect(0, 0, room.width, room.height);
   // Draw floor
   ctx.fillStyle = '#ffe0ef';
@@ -22,7 +30,7 @@ function drawRoom(ctx) {
   // Draw spots
   room.spots.forEach(spot => {
     const img = document.getElementById('img-' + spot.name);
-    if (img) ctx.drawImage(img, spot.x, spot.y, 48, 48);
+    if (img) ctx.drawImage(img, spot.x, spot.y, spot.size, spot.size);
   });
   // Draw character
   const charImg = document.getElementById('img-character');
@@ -49,16 +57,27 @@ function checkSpot() {
 function moveCharacter(dx, dy) {
   room.character.x = Math.max(0, Math.min(room.width - room.character.size, room.character.x + dx));
   room.character.y = Math.max(0, Math.min(room.height - room.character.size, room.character.y + dy));
-  drawRoom(document.getElementById('hobby-canvas').getContext('2d'));
+  // redraw using shared scaled context
+  drawRoom();
   checkSpot();
 }
 
 document.addEventListener('DOMContentLoaded', function() {
   const canvas = document.getElementById('hobby-canvas');
   if (!canvas) return;
-  canvas.width = room.width;
-  canvas.height = room.height;
-  drawRoom(canvas.getContext('2d'));
+  // HiDPI / retina support: set internal pixel size and scale context
+  const dpr = window.devicePixelRatio || 1;
+  canvas.width = Math.round(room.width * dpr);
+  canvas.height = Math.round(room.height * dpr);
+  canvas.style.width = room.width + 'px';
+  canvas.style.height = room.height + 'px';
+  const ctx = canvas.getContext('2d');
+  // reset then scale
+  ctx.setTransform(1, 0, 0, 1, 0, 0);
+  ctx.scale(dpr, dpr);
+  ctx.imageSmoothingEnabled = false;
+  hobbyCtx = ctx;
+  drawRoom();
   checkSpot();
 
   let controlsEnabled = false;
