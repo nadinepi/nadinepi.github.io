@@ -7,9 +7,9 @@ const room = {
   spots: [
     { name: 'skateboard', x: 80, y: 140, img: 'hobby-skateboard.png', blurb: 'I love skateboarding! It keeps me active and is super fun.', size: 150 },
     { name: 'climbing', x: 270, y: 80, img: 'hobby-climbing.png', blurb: 'Climbing is my favorite way to challenge myself and stay fit.', size: 100 },
-    { name: 'art', x: 480, y: 150, img: 'hobby-art.png', blurb: 'I enjoy painting and drawing in my free time.', size: 48 }
+    { name: 'art', x: 480, y: 150, img: 'hobby-art.png', blurb: 'I enjoy painting and drawing in my free time.', size: 65 }
   ],
-  character: { x: 50, y: 200, img: 'hobby-character.png', size: 300 }
+  character: { x: 50, y: 200, img: 'hobby-character.png', size: 200 }
 };
 
 // Shared, scaled drawing context (set in DOMContentLoaded)
