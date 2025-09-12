@@ -115,12 +115,14 @@
 							   <p>Use the arrow keys to move around my room and discover my hobbies!</p>
 							   <!-- BEGIN HOBBY ROOM -->
 								<!-- Cute pixel hobby room for Hobbies section -->
-				<div style="display:flex; justify-content:center;">
-					<div id="hobby-room-container" style="position:relative; display:inline-block; max-width:800px; text-align:center; margin-bottom:2em;">
-  <button id="hobby-room-start" style="position:absolute; left:50%; top:12px; transform:translateX(-50%); font-size:1.05em; background:#d16ba5; color:#fff; border:none; border-radius:1em; padding:0.5em 1.6em; box-shadow:0 2px 8px #d16ba533; cursor:pointer; z-index:3;">Start Exploring</button>
-					<div id="hobby-room-overlay" style="position:absolute; left:0; top:0; width:100%; height:100%; background:rgba(220,200,220,0.6); border-radius:1.5em; z-index:2; display:block;"></div>
-					<canvas id="hobby-canvas" style="background:#fff8fb; border-radius:1.5em; box-shadow:0 2px 12px #f9c6e033; position:relative; z-index:1;"></canvas>
-									<div id="hobby-blurb" style="margin-top:1em; font-size:1.1em; color:#d16ba5; min-height:2em; transition:opacity 0.3s;"></div>
+								<div style="display:flex; justify-content:center;">
+										<div id="hobby-room-container" style="position:relative; display:inline-block; max-width:800px; text-align:center; margin-bottom:2em;">
+											  <div id="hobby-canvas-wrapper" style="position:relative; width:800px; height:350px; margin:0 auto;">
+												<button id="hobby-room-start" style="position:absolute; left:50%; top:12px; transform:translateX(-50%); font-size:1.05em; background:#d16ba5; color:#fff; border:none; border-radius:1em; padding:0.5em 1.6em; box-shadow:0 2px 8px #d16ba533; cursor:pointer; z-index:3; font-family:inherit; font-weight:700;">Start Exploring</button>
+												<div id="hobby-room-overlay" style="position:absolute; left:0; top:0; width:100%; height:100%; background:rgba(220,200,220,0.6); border-radius:1.5em; z-index:2; display:block;"></div>
+												<canvas id="hobby-canvas" style="background:#fff8fb; border-radius:1.5em; box-shadow:0 2px 12px #f9c6e033; position:relative; z-index:1; width:100%; height:100%;"></canvas>
+											</div>
+											<div id="hobby-blurb" style="margin-top:1em; font-size:1.1em; color:#d16ba5; min-height:2em; transition:opacity 0.3s;"></div>
 									<!-- Preload images for pixel art -->
 									<img id="img-character" src="assets/images/hobby-character.png" style="display:none;" alt="character" />
 									<img id="img-skateboard" src="assets/images/hobby-skateboard.png" style="display:none;" alt="skateboard" />
