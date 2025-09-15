@@ -5,9 +5,9 @@ const room = {
   width: 800,
   height: 350,
   spots: [
-    { name: 'skateboard', x: 80, y: 140, img: 'hobby-skateboard.png', blurb: 'I love skateboarding! It keeps me active and is super fun.', size: 150 },
-    { name: 'climbing', x: 270, y: 80, img: 'hobby-climbing.png', blurb: 'Climbing is my favorite way to challenge myself and stay fit.', size: 100 },
-    { name: 'art', x: 480, y: 150, img: 'hobby-art.png', blurb: 'I enjoy painting and drawing in my free time.', size: 65 }
+    { name: 'skateboard', x: 80, y: 140, img: 'hobby-skateboard.png', blurb: 'I love skateboarding whenever I can! Malmö is a great place for it.', size: 150 },
+    { name: 'climbing', x: 270, y: 80, img: 'hobby-climbing.png', blurb: 'Bouldering is a fun way to stay active, especially in the winter when it\'s too cold to skate outside.', size: 100 },
+    { name: 'art', x: 480, y: 150, img: 'hobby-art.png', blurb: 'I enjoy painting and drawing in my free time, especially landscapes.', size: 65 }
   ],
   character: { x: 50, y: 200, img: 'hobby-character.png', size: 200 }
 };
@@ -39,12 +39,31 @@ function drawRoom(ctx) {
 
 function checkSpot() {
   currentSpot = null;
-  room.spots.forEach(spot => {
-    if (Math.abs(room.character.x - spot.x) < 40 && Math.abs(room.character.y - spot.y) < 40) {
+  // character rectangle
+  const cx = room.character.x;
+  const cy = room.character.y;
+  const cw = room.character.size;
+  const ch = room.character.size;
+
+  // small padding so the player doesn't have to perfectly overlap
+  const padding = 6; 
+
+  for (let i = 0; i < room.spots.length; i++) {
+    const spot = room.spots[i];
+    const sx = spot.x - padding;
+    const sy = spot.y - padding;
+    const sw = spot.size + padding * 2;
+    const sh = spot.size + padding * 2;
+
+    // AABB collision
+    if (cx < sx + sw && cx + cw > sx && cy < sy + sh && cy + ch > sy) {
       currentSpot = spot;
+      break;
     }
-  });
+  }
+
   const blurb = document.getElementById('hobby-blurb');
+  if (!blurb) return;
   if (currentSpot) {
     blurb.textContent = currentSpot.blurb;
     blurb.style.opacity = 1;
