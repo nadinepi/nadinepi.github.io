@@ -30,11 +30,47 @@ function drawRoom(ctx) {
   // Draw spots
   room.spots.forEach(spot => {
     const img = document.getElementById('img-' + spot.name);
-    if (img) ctx.drawImage(img, spot.x, spot.y, spot.size, spot.size);
+    if (!img) return;
+    // If image not loaded yet, redraw when it loads
+    if (!img.complete) {
+      img.onload = () => drawRoom();
+      return;
+    }
+    // preserve aspect ratio and center within spot box
+    const iw = img.naturalWidth || img.width;
+    const ih = img.naturalHeight || img.height;
+    if (!iw || !ih) {
+      ctx.drawImage(img, spot.x, spot.y, spot.size, spot.size);
+      return;
+    }
+    const scale = Math.min(spot.size / iw, spot.size / ih);
+    const dw = Math.round(iw * scale);
+    const dh = Math.round(ih * scale);
+    const dx = Math.round(spot.x + (spot.size - dw) / 2);
+    const dy = Math.round(spot.y + (spot.size - dh) / 2);
+    ctx.drawImage(img, dx, dy, dw, dh);
   });
   // Draw character
   const charImg = document.getElementById('img-character');
-  if (charImg) ctx.drawImage(charImg, room.character.x, room.character.y, room.character.size, room.character.size);
+  if (charImg) {
+    if (!charImg.complete) {
+      charImg.onload = () => drawRoom();
+    } else {
+      const iw = charImg.naturalWidth || charImg.width;
+      const ih = charImg.naturalHeight || charImg.height;
+      const box = { x: room.character.x, y: room.character.y, size: room.character.size };
+      if (iw && ih) {
+        const scale = Math.min(box.size / iw, box.size / ih);
+        const dw = Math.round(iw * scale);
+        const dh = Math.round(ih * scale);
+        const dx = Math.round(box.x + (box.size - dw) / 2);
+        const dy = Math.round(box.y + (box.size - dh) / 2);
+        ctx.drawImage(charImg, dx, dy, dw, dh);
+      } else {
+        ctx.drawImage(charImg, box.x, box.y, box.size, box.size);
+      }
+    }
+  }
 }
 
 function checkSpot() {
