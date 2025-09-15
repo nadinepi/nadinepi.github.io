@@ -1840,9 +1840,10 @@ input, select, textarea {
 		transition: border-color 0.2s ease;
 		background-color: #fff0f6;
 		border: none !important;
-		border-radius: 1.25em;
+		border-radius: 9999px; /* pill-shaped */
 		color: #5a3550 !important;
 		box-shadow: 0 6px 18px rgba(209,107,165,0.08);
+		transition: transform 120ms ease, box-shadow 120ms ease, background-color 120ms ease;
 		cursor: pointer;
 		display: inline-block;
 		font-size: 0.6em;
@@ -1952,8 +1953,9 @@ input, select, textarea {
 		input[type="button"]:hover,
 		button:hover,
 		.button:hover {
-			background-color: #ffe6f2;
-			box-shadow: 0 8px 22px rgba(209,107,165,0.12);
+			transform: translateY(-2px);
+			box-shadow: 0 12px 30px rgba(209,107,165,0.12);
+			background-color: #ffd9ec; /* subtle darker pink */
 		}
 
 			input[type="submit"]:hover:after,
