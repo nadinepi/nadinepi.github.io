@@ -1839,10 +1839,10 @@ input, select, textarea {
 		-ms-transition: border-color 0.2s ease;
 		transition: border-color 0.2s ease;
 		background-color: #fff0f6;
-		border: solid 1px !important;
-		border-color: #f9c6e0 !important;
-		border-radius: 3em;
+		border: none !important;
+		border-radius: 1.25em;
 		color: #5a3550 !important;
+		box-shadow: 0 6px 18px rgba(209,107,165,0.08);
 		cursor: pointer;
 		display: inline-block;
 		font-size: 0.6em;
@@ -1952,7 +1952,8 @@ input, select, textarea {
 		input[type="button"]:hover,
 		button:hover,
 		.button:hover {
-			border-color: #d16ba5 !important;
+			background-color: #ffe6f2;
+			box-shadow: 0 8px 22px rgba(209,107,165,0.12);
 		}
 
 			input[type="submit"]:hover:after,
