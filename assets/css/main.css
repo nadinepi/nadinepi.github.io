@@ -1838,11 +1838,11 @@ input, select, textarea {
 		-webkit-transition: border-color 0.2s ease;
 		-ms-transition: border-color 0.2s ease;
 		transition: border-color 0.2s ease;
-		background-color: transparent;
+		background-color: #fff0f6;
 		border: solid 1px !important;
-		border-color: rgba(255, 255, 255, 0.15) !important;
+		border-color: #f9c6e0 !important;
 		border-radius: 3em;
-		color: #ffffff !important;
+		color: #5a3550 !important;
 		cursor: pointer;
 		display: inline-block;
 		font-size: 0.6em;
@@ -1921,8 +1921,8 @@ input, select, textarea {
 		input[type="button"].primary,
 		button.primary,
 		.button.primary {
-			background-color: #ffffff;
-			color: #312450 !important;
+			background-color: #e17ea3;
+			color: #ffffff !important;
 		}
 
 			input[type="submit"].primary:after,
@@ -1952,7 +1952,7 @@ input, select, textarea {
 		input[type="button"]:hover,
 		button:hover,
 		.button:hover {
-			border-color: rgba(255, 255, 255, 0.55) !important;
+			border-color: #d16ba5 !important;
 		}
 
 			input[type="submit"]:hover:after,
