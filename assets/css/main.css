@@ -3264,6 +3264,16 @@ input, select, textarea {
 	vertical-align: middle;
 	margin: 0 0.3em;
 }
+
+/* Page-specific overrides */
+/* Keep the intro (home) button hover high-contrast against the background */
+#intro .button:hover,
+#intro .button:focus {
+	background-color: #e17ea3; /* use primary pink so it stands out */
+	color: #ffffff !important;
+	box-shadow: 0 12px 30px rgba(209,107,165,0.18);
+	transform: translateY(-2px);
+}
 		}
 
 		.wrapper.style1-alt {
