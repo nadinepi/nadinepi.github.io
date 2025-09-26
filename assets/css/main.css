@@ -82,13 +82,23 @@ input, select, textarea {
 	}
 
 	@media screen and (max-width: 480px) {
+
 		html, body {
 			min-width: 320px;
 		}
+
+	}
+
+	html {
+		box-sizing: border-box;
 	}
 
 	*, *:before, *:after {
 		box-sizing: inherit;
+	}
+
+	body {
+		background: linear-gradient(135deg, #ffe0ef 0%, #f9c6e0 100%);
 	}
 
 		body.is-preload *, body.is-preload *:before, body.is-preload *:after {
@@ -4048,6 +4058,7 @@ input, select, textarea {
 			}
 
 		}
+å
 /* Intro */
 
 	#intro {
