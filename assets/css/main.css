@@ -3020,6 +3020,8 @@ input, select, textarea {
 			object-fit: cover;
 			margin: 0 auto;
 			display: block;
+			position: relative;
+			z-index: 2; /* sit above the pseudo-overlay */
 		}
 
 			.spotlights > section > .image:before {
@@ -3032,10 +3034,11 @@ input, select, textarea {
 				display: block;
 				height: 100%;
 				left: 0;
-				opacity: 0;
+				opacity: 0; /* keep overlay hidden by default */
 				position: absolute;
 				top: 0;
 				width: 100%;
+				z-index: 1;
 			}
 
 		.spotlights > section > .content {
