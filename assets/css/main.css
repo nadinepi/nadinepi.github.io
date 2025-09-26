@@ -3136,8 +3136,6 @@ input, select, textarea {
 				/* Move avatar toward the top third of the section on wide screens */
 				.spotlights > section:not(.inactive) > .image {
 					align-self: flex-start;
-					/* nudge upward a bit to sit in the top third visually */
-					transform: translateY(-10%);
 				}
 
 				/* Keep inactive (pre-enter) behavior unchanged; it uses translateY(1em) */
