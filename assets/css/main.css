@@ -2596,13 +2596,13 @@ input, select, textarea {
 
 		.image.left {
 			float: left;
-			margin: 0 1em 1em 0;
+			margin: 0 0.6em 1em 0;
 			top: 0.25em;
 		}
 
 		.image.right {
 			float: right;
-			margin: 0 0 1em 1em;
+			margin: 0 0 1em 0.6em;
 			top: 0.25em;
 		}
 
@@ -3122,6 +3122,18 @@ input, select, textarea {
 				}
 			}
 
+			/* Desktop: give spotlight images outer breathing room */
+			@media screen and (min-width: 981px) {
+				.spotlights > section > .image {
+					margin-right: 2.2em;
+				}
+				/* If layout reverses, ensure image still has space (covers both cases) */
+				.spotlights > section:nth-child(odd) > .image {
+					margin-left: 2.2em;
+					margin-right: 0;
+				}
+			}
+
 		.spotlights > section > .content {
 
 		/* Responsive avatar sizes */
@@ -3145,7 +3157,7 @@ input, select, textarea {
 		        height: 180px;
 		    }
 		}
-			padding: 3.2em 3em 2em 3em ;
+			padding: 3.2em 2.2em 2em 2.2em ;
 			display: -moz-flex;
 			display: -webkit-flex;
 			display: -ms-flex;
@@ -3202,7 +3214,7 @@ input, select, textarea {
 		@media screen and (max-width: 1680px) {
 
 			.spotlights > section > .content {
-				padding: 3.2em 2.5em 1.8em 2.5em ;
+				padding: 3.2em 2em 1.6em 2em ;
 			}
 
 		}
