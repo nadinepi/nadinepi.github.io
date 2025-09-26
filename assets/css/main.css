@@ -3274,6 +3274,27 @@ input, select, textarea {
 	box-shadow: 0 12px 30px rgba(209,107,165,0.18);
 	transform: translateY(-2px);
 }
+
+/* Improve contrast for headings and pale buttons when inside light/white sections */
+/* Scoped to style2/style2-alt/style3 wrappers so overall theme isn't affected */
+.wrapper.style2 h1, .wrapper.style2 h2,
+.wrapper.style2-alt h1, .wrapper.style2-alt h2,
+.wrapper.style3 h1, .wrapper.style3 h2 {
+	/* slightly richer background and subtle border to lift headings off pale sections */
+	background: linear-gradient(90deg, #fff0f6 0%, #ffe6f1 100%);
+	border: 1px solid rgba(209,107,165,0.06);
+	box-shadow: 0 6px 20px rgba(209,107,165,0.12);
+}
+
+.wrapper.style2 .button,
+.wrapper.style2-alt .button,
+.wrapper.style3 .button {
+	/* non-primary buttons get a tad more contrast on pale wrappers */
+	background-color: #ffeef6;
+	border: 1px solid rgba(209,107,165,0.07) !important;
+	box-shadow: 0 8px 24px rgba(209,107,165,0.10);
+	color: #5a3550 !important;
+}
 		}
 
 		.wrapper.style1-alt {
