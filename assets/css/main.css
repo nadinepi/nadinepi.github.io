@@ -3111,12 +3111,24 @@ input, select, textarea {
 	}
 
 	/* Ensure any earlier full-width header rules on #one and #three are reset */
+	/* Reset previous full-width styles but keep heading padding so the accent doesn't overlap */
 	#one .content .inner h2,
 	#three .inner h2 {
 		background: none !important;
 		box-shadow: none !important;
 		width: auto !important;
-		padding: 0 !important;
+		/* keep normal padding so the accent sits to the left of the first letter */
+	}
+
+	/* Slightly thinner accent and slightly more left padding for consistent spacing */
+	.wrapper .inner > h2 {
+		padding-left: 1.35em; /* slightly increased space for the accent */
+	}
+
+	.wrapper .inner > h2:before {
+		width: 6px; /* thinner accent */
+		height: 56%;
+		border-radius: 3px;
 	}
 
 	/* Add padding and a subtle white ring so the circular avatar has breathing room */
