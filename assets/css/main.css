@@ -82,17 +82,6 @@ input, select, textarea {
 	}
 
 	@media screen and (max-width: 480px) {
-
-		html, body {
-			min-width: 320px;
-		}
-
-	}
-
-	html {
-		box-sizing: border-box;
-	}
-
 	*, *:before, *:after {
 		box-sizing: inherit;
 	}
