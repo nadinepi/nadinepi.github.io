@@ -3073,26 +3073,50 @@ input, select, textarea {
 		}
 
 	/* About section header styling */
-	#one .content .inner h2,
-	#three .inner h2 {
-		/* lighter pink to match the site's soft palette and align with style3 headers */
-		background: #f6a6c5;
-		color: #ffffff !important;
-		display: block; /* full width within the content column */
-		width: 100%;
-		/* Match the standard heading padding so the vertical size matches 'My work' */
-		padding: 0.35em 0.8em;
-		border-radius: 12px;
-		box-shadow: 0 6px 20px rgba(209,107,165,0.12);
-		margin-bottom: 0.6em;
+	/* Left-accent heading style: small colored bar to the left of the heading text */
+	.wrapper .inner > h2 {
+		position: relative;
+		display: inline-block; /* only as wide as the text */
+		padding-left: 1.6em; /* room for the accent */
+		background: none !important; /* override previous full-width rules */
+		width: auto !important;
+		color: inherit;
+		margin-bottom: 0.8em;
+		border-radius: 0;
+		box-shadow: none !important;
+	}
+
+	.wrapper .inner > h2:before {
+		content: '';
+		position: absolute;
+		left: 0;
+		top: 50%;
+		transform: translateY(-50%);
+		width: 8px;
+		height: 60%;
+		background: #f6a6c5; /* accent color */
+		border-radius: 4px;
 	}
 
 	@media screen and (max-width: 736px) {
-		#one .content .inner h2,
-		#three .inner h2 {
-			padding: 0.3em 0.7em;
-			border-radius: 10px;
+		.wrapper .inner > h2 {
+			padding-left: 1.1em;
 		}
+
+		.wrapper .inner > h2:before {
+			width: 6px;
+			height: 56%;
+			border-radius: 3px;
+		}
+	}
+
+	/* Ensure any earlier full-width header rules on #one and #three are reset */
+	#one .content .inner h2,
+	#three .inner h2 {
+		background: none !important;
+		box-shadow: none !important;
+		width: auto !important;
+		padding: 0 !important;
 	}
 
 	/* Add padding and a subtle white ring so the circular avatar has breathing room */
