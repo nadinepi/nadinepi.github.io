@@ -3008,6 +3008,23 @@ input, select, textarea {
 		min-height: 22.5em;
 	}
 
+	/* Ensure spotlight image and content are vertically centered */
+	.spotlights > section {
+		align-items: center;
+	}
+
+	/* Prevent JS from using the image as a full-section background here; keep only the <img> element visible */
+	.spotlights > section > .image {
+		background-image: none !important;
+		background-size: auto !important;
+		background-position: center !important;
+		display: -webkit-flex; /* keep as a flex container so img can be centered */
+		display: -ms-flexbox;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
 		body.is-ie .spotlights > section {
 			min-height: 0;
 		}
