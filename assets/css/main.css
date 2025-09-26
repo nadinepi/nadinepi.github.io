@@ -82,12 +82,13 @@ input, select, textarea {
 	}
 
 	@media screen and (max-width: 480px) {
-	*, *:before, *:after {
-		box-sizing: inherit;
+		html, body {
+			min-width: 320px;
+		}
 	}
 
-	body {
-		background: linear-gradient(135deg, #ffe0ef 0%, #f9c6e0 100%);
+	*, *:before, *:after {
+		box-sizing: inherit;
 	}
 
 		body.is-preload *, body.is-preload *:before, body.is-preload *:after {
@@ -4047,7 +4048,6 @@ input, select, textarea {
 			}
 
 		}
-å
 /* Intro */
 
 	#intro {
