@@ -3023,6 +3023,7 @@ input, select, textarea {
 		display: flex;
 		align-items: center;
 		justify-content: center;
+		transition: opacity 0.6s ease, transform 0.6s ease;
 	}
 
 		body.is-ie .spotlights > section {
@@ -3045,6 +3046,35 @@ input, select, textarea {
 			border-radius: 50%; /* circular */
 		}
 
+		/* When sections are inactive (before scrollex enters), keep image faded/shifted
+		   using the same circular presentation so the animation won't show a square */
+		.spotlights > section.inactive > .image,
+		body.is-preload .spotlights > section > .image {
+			opacity: 0;
+			transform: translateY(1em);
+		}
+
+		.spotlights > section.inactive > .image img,
+		body.is-preload .spotlights > section > .image img {
+			opacity: 0;
+			transform: scale(0.95);
+		}
+
+		.spotlights > section > .content > .inner {
+			transition: opacity 0.6s ease, transform 0.6s ease;
+		}
+
+	/* Add padding and a subtle white ring so the circular avatar has breathing room */
+	.spotlights > section > .image {
+		padding: 0.8em; /* space around the circular image */
+		box-sizing: content-box;
+	}
+
+	.spotlights > section > .image img {
+		border: 5px solid #fff; /* white ring */
+		box-shadow: 0 6px 20px rgba(209,107,165,0.12);
+	}
+
 			.spotlights > section > .image:before {
 				-moz-transition: opacity 1s ease;
 				-webkit-transition: opacity 1s ease;
@@ -3053,8 +3083,9 @@ input, select, textarea {
 				background: rgba(49, 36, 80, 0.9);
 				content: '';
 				display: block;
-				height: 100%;
-				left: 0;
+				height: 180px;
+				width: 180px;
+				transition: width 0.3s ease, height 0.3s ease, transform 0.3s ease, opacity 0.3s ease;
 				opacity: 0; /* keep overlay hidden by default */
 				position: absolute;
 				top: 0;
@@ -3063,6 +3094,28 @@ input, select, textarea {
 			}
 
 		.spotlights > section > .content {
+
+		/* Responsive avatar sizes */
+		@media screen and (max-width: 736px) {
+		    .spotlights > section > .image img {
+		        width: 120px;
+		        height: 120px;
+		    }
+		}
+
+		@media screen and (min-width: 737px) and (max-width: 980px) {
+		    .spotlights > section > .image img {
+		        width: 140px;
+		        height: 140px;
+		    }
+		}
+
+		@media screen and (min-width: 981px) {
+		    .spotlights > section > .image img {
+		        width: 180px;
+		        height: 180px;
+		    }
+		}
 			padding: 4em 5em 2em 5em ;
 			display: -moz-flex;
 			display: -webkit-flex;
