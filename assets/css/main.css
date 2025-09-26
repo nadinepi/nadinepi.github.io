@@ -3122,7 +3122,7 @@ input, select, textarea {
 
 	/* Slightly thinner accent and slightly more left padding for consistent spacing */
 	.wrapper .inner > h2 {
-		padding-left: 0.8em; /* slightly increased space for the accent */
+		padding-left: 0.6em; /* slightly increased space for the accent */
 	}
 
 	.wrapper .inner > h2:before {
