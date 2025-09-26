@@ -152,7 +152,7 @@ input, select, textarea {
 		-ms-transition: color 0.2s ease, border-bottom-color 0.2s ease;
 		transition: color 0.2s ease, border-bottom-color 0.2s ease;
 		border-bottom: 2px dotted #f9c6e0;
-		color: #e17ea3;
+		color: #f6a6c5;
 		text-decoration: none;
 	}
 
@@ -1922,7 +1922,7 @@ input, select, textarea {
 		input[type="button"].primary,
 		button.primary,
 		.button.primary {
-			background-color: #e17ea3;
+			background-color: #f6a6c5;
 			color: #ffffff !important;
 		}
 
@@ -3421,7 +3421,7 @@ input, select, textarea {
 
 /* Stronger contrast for action buttons inside spotlights content */
 .spotlights > section > .content .button {
-	background-color: #e17ea3; /* make them primary pink to stand out */
+	background-color: #f6a6c5; /* make them primary pink to stand out */
 	color: #ffffff !important;
 	box-shadow: 0 12px 30px rgba(209,107,165,0.16);
 	border: none !important;
@@ -3433,7 +3433,7 @@ input, select, textarea {
 /* Keep the intro (home) button hover high-contrast against the background */
 #intro .button:hover,
 #intro .button:focus {
-	background-color: #e17ea3; /* use primary pink so it stands out */
+	background-color: #f6a6c5; /* use primary pink so it stands out */
 	color: #ffffff !important;
 	box-shadow: 0 12px 30px rgba(209,107,165,0.18);
 	transform: translateY(-2px);
@@ -4001,7 +4001,7 @@ input, select, textarea {
 
 			#sidebar nav a:hover {
 				   color: #fff;
-				   background: #e17ea3;
+				   background: #f6a6c5;
 			}
 
 			#sidebar nav a.active {
