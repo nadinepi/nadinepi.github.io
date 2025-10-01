@@ -3791,7 +3791,8 @@ input, select, textarea {
 		cursor: default;
 		height: 100vh;
 		left: 0;
-		overflow: visible; /* allow inner to handle scrolling so corners remain clipped */
+		/* Allow inner to handle scrolling; keep overflow hidden here so rounded corners clip children */
+		-webkit-overflow-scrolling: touch;
 		position: fixed;
 		text-align: right;
 		top: 0;
@@ -3827,6 +3828,9 @@ input, select, textarea {
 			overflow-y: auto;
 			height: 100%;
 			width: 100%;
+			background: transparent; /* ensure no rectangular background shows */
+			position: relative; /* create stacking context */
+			z-index: 1;
 		}
 
 			body.is-ie #sidebar > .inner {
