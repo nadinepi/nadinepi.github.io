@@ -116,7 +116,12 @@ function checkSpot() {
   const blurb = document.getElementById('hobby-blurb');
   if (!blurb) return;
   if (currentSpot) {
-    blurb.textContent = currentSpot.blurb;
+    // If it's an artwork, show its title
+    if (currentSpot.artTitle) {
+      blurb.textContent = currentSpot.artTitle;
+    } else {
+      blurb.textContent = currentSpot.blurb;
+    }
     blurb.style.opacity = 1;
   } else {
     blurb.textContent = '';
@@ -265,21 +270,13 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     return null;
   }
-  canvas.addEventListener('click', function(e) {
-    const rect = canvas.getBoundingClientRect();
-    const mx = (e.clientX - rect.left) * (room.width / rect.width);
-    const my = (e.clientY - rect.top) * (room.height / rect.height);
-    const spot = getArtSpotAt(mx, my);
-    if (spot) {
-      openArtModal(spot);
-    }
-  });
+  // Remove click-to-open for art modal
   // Keyboard accessibility: Enter/Space opens modal if hovered
-  canvas.addEventListener('keydown', function(e) {
-    if (!['Enter', ' '].includes(e.key)) return;
-    // Use last hovered art spot
-    if (window.lastHoveredArtSpot) {
-      openArtModal(window.lastHoveredArtSpot);
+  // Only allow Enter to open modal if character is on an art spot
+  document.addEventListener('keydown', function(e) {
+    if (!controlsEnabled) return;
+    if (e.key === 'Enter' && currentSpot && currentSpot.artTitle) {
+      openArtModal(currentSpot);
     }
   });
   // Track last hovered art spot for keyboard
