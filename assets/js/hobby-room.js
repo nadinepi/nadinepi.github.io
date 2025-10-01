@@ -116,11 +116,12 @@ function checkSpot() {
   const blurb = document.getElementById('hobby-blurb');
   if (!blurb) return;
   if (currentSpot) {
-    blurb.textContent = currentSpot.blurb;
-    blurb.style.opacity = 1;
     if (currentSpot.artTitle) {
-      blurb.textContent += '\n(press Enter to view)';
+      blurb.innerHTML = currentSpot.blurb + '<br><span style="color:#d16ba5;font-size:0.98em;">(press Enter to view)</span>';
+    } else {
+      blurb.textContent = currentSpot.blurb;
     }
+    blurb.style.opacity = 1;
   } else {
     blurb.textContent = '';
     blurb.style.opacity = 0;
