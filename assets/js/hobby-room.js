@@ -43,8 +43,6 @@ function drawRoom(ctx) {
       img.src = spot.artSrc;
       img.id = 'img-' + spot.name;
       img.style.display = 'none';
-      // Make sure browser uses pixelated rendering for hidden img
-      img.style.imageRendering = 'pixelated';
       document.body.appendChild(img);
     }
     if (!img) return;
@@ -52,24 +50,13 @@ function drawRoom(ctx) {
       img.onload = () => drawRoom();
       return;
     }
-    // Ensure pixelation for art images
-    if (spot.artSrc && ctx) {
-      ctx.imageSmoothingEnabled = false;
-      ctx.mozImageSmoothingEnabled = false;
-      ctx.webkitImageSmoothingEnabled = false;
-      ctx.msImageSmoothingEnabled = false;
-    }
     const iw = img.naturalWidth || img.width;
     const ih = img.naturalHeight || img.height;
     if (!iw || !ih) {
       ctx.drawImage(img, spot.x, spot.y, spot.size, spot.size);
       return;
     }
-    // For art images, scale up to exaggerate pixelation
-    let scale = Math.min(spot.size / iw, spot.size / ih);
-    if (spot.artSrc) {
-      scale = Math.floor(Math.min(spot.size / iw, spot.size / ih) * 0.4 * 10) / 10; // force a lower scale for chunkier pixels
-    }
+    const scale = Math.min(spot.size / iw, spot.size / ih);
     const dw = Math.round(iw * scale);
     const dh = Math.round(ih * scale);
     const dx = Math.round(spot.x + (spot.size - dw) / 2);
@@ -77,68 +64,272 @@ function drawRoom(ctx) {
     ctx.drawImage(img, dx, dy, dw, dh);
   });
   // Draw character
-  let charImg = document.getElementById('img-character');
-  if (!charImg.complete) {
-    charImg.onload = () => drawRoom();
-    return;
+  const charImg = document.getElementById('img-character');
+  if (charImg) {
+    if (!charImg.complete) {
+      charImg.onload = () => drawRoom();
+    } else {
+      const iw = charImg.naturalWidth || charImg.width;
+      const ih = charImg.naturalHeight || charImg.height;
+      const box = { x: room.character.x, y: room.character.y, size: room.character.size };
+      if (iw && ih) {
+        const scale = Math.min(box.size / iw, box.size / ih);
+        const dw = Math.round(iw * scale);
+        const dh = Math.round(ih * scale);
+        const dx = Math.round(box.x + (box.size - dw) / 2);
+        const dy = Math.round(box.y + (box.size - dh) / 2);
+        ctx.drawImage(charImg, dx, dy, dw, dh);
+      } else {
+        ctx.drawImage(charImg, box.x, box.y, box.size, box.size);
+      }
+    }
   }
-  ctx.drawImage(charImg, room.character.x, room.character.y, room.character.size, room.character.size);
+  // Hide tooltip if not hovering
+  if (artTooltip) artTooltip.style.display = 'none';
 }
 
-// Initialize the room drawing and set up event handlers
-function initHobbyRoom() {
-  const canvas = document.getElementById('hobby-room-canvas');
-  hobbyCtx = canvas.getContext('2d');
-  canvas.width = room.width;
-  canvas.height = room.height;
+function checkSpot() {
+  currentSpot = null;
+  // character rectangle
+  const cx = room.character.x;
+  const cy = room.character.y;
+  const cw = room.character.size;
+  const ch = room.character.size;
 
+  // small padding so the player doesn't have to perfectly overlap
+  const padding = 6; 
+
+  for (let i = 0; i < room.spots.length; i++) {
+    const spot = room.spots[i];
+    const sx = spot.x - padding;
+    const sy = spot.y - padding;
+    const sw = spot.size + padding * 2;
+    const sh = spot.size + padding * 2;
+
+    // AABB collision
+    if (cx < sx + sw && cx + cw > sx && cy < sy + sh && cy + ch > sy) {
+      currentSpot = spot;
+      break;
+    }
+  }
+
+  const blurb = document.getElementById('hobby-blurb');
+  if (!blurb) return;
+  if (currentSpot) {
+    if (currentSpot.artTitle) {
+      blurb.innerHTML = currentSpot.blurb + '<br><span style="color:#d16ba5;font-size:0.98em;">(press Enter to view)</span>';
+    } else {
+      blurb.textContent = currentSpot.blurb;
+    }
+    blurb.style.opacity = 1;
+  } else {
+    blurb.textContent = '';
+    blurb.style.opacity = 0;
+  }
+}
+
+function moveCharacter(dx, dy) {
+  room.character.x = Math.max(0, Math.min(room.width - room.character.size, room.character.x + dx));
+  room.character.y = Math.max(0, Math.min(room.height - room.character.size, room.character.y + dy));
+  // redraw using shared scaled context
   drawRoom();
-
-  // Setup tooltip for art spots
-  artTooltip = document.getElementById('art-tooltip');
-
-  room.spots.forEach(spot => {
-    const spotElement = document.getElementById('spot-' + spot.name);
-    if (spotElement) {
-      spotElement.addEventListener('mouseenter', () => {
-        currentSpot = spot;
-        artTooltip.innerHTML = `<strong>${spot.artTitle || spot.name}</strong><br>${spot.blurb}`;
-        artTooltip.style.display = 'block';
-      });
-      spotElement.addEventListener('mouseleave', () => {
-        currentSpot = null;
-        artTooltip.style.display = 'none';
-      });
-      spotElement.addEventListener('click', () => {
-        // On click, navigate to a detailed view or perform an action
-        alert('Navigating to ' + spot.name + ' details...');
-      });
-    }
-  });
-
-  // Character movement (WASD or arrow keys)
-  window.addEventListener('keydown', (e) => {
-    const step = 5;
-    switch (e.key) {
-      case 'ArrowUp':
-      case 'w':
-        room.character.y = Math.max(0, room.character.y - step);
-        break;
-      case 'ArrowDown':
-      case 's':
-        room.character.y = Math.min(room.height - room.character.size, room.character.y + step);
-        break;
-      case 'ArrowLeft':
-      case 'a':
-        room.character.x = Math.max(0, room.character.x - step);
-        break;
-      case 'ArrowRight':
-      case 'd':
-        room.character.x = Math.min(room.width - room.character.size, room.character.x + step);
-        break;
-    }
-    drawRoom();
-  });
+  checkSpot();
 }
 
-document.addEventListener('DOMContentLoaded', initHobbyRoom);
+document.addEventListener('DOMContentLoaded', function() {
+  const canvas = document.getElementById('hobby-canvas');
+  if (!canvas) return;
+  // HiDPI / retina support: set internal pixel size and scale context
+  const dpr = window.devicePixelRatio || 1;
+  // Internal pixel buffer (keeps drawing crisp on HiDPI)
+  canvas.width = Math.round(room.width * dpr);
+  canvas.height = Math.round(room.height * dpr);
+  // But keep the displayed size responsive to the wrapper
+  canvas.style.width = '100%';
+  canvas.style.height = '100%';
+  const ctx = canvas.getContext('2d');
+  // reset then scale
+  ctx.setTransform(1, 0, 0, 1, 0, 0);
+  ctx.scale(dpr, dpr);
+  ctx.imageSmoothingEnabled = false;
+  hobbyCtx = ctx;
+  drawRoom();
+  checkSpot();
+
+  // Tooltip for art
+  artTooltip = document.createElement('div');
+  artTooltip.style.position = 'fixed';
+  artTooltip.style.pointerEvents = 'none';
+  artTooltip.style.background = '#fff9fc';
+  artTooltip.style.color = '#d16ba5';
+  artTooltip.style.border = '1px solid #d16ba5';
+  artTooltip.style.borderRadius = '8px';
+  artTooltip.style.padding = '6px 12px';
+  artTooltip.style.fontFamily = 'Quicksand, sans-serif';
+  artTooltip.style.fontSize = '1rem';
+  artTooltip.style.boxShadow = '0 2px 8px rgba(209,107,165,0.12)';
+  artTooltip.style.zIndex = 1000;
+  artTooltip.style.display = 'none';
+  document.body.appendChild(artTooltip);
+
+  // Modal for art
+  let artModal = document.createElement('div');
+  artModal.style.position = 'fixed';
+  artModal.style.left = 0;
+  artModal.style.top = 0;
+  artModal.style.width = '100vw';
+  artModal.style.height = '100vh';
+  artModal.style.background = 'rgba(255, 249, 252, 0.96)';
+  artModal.style.display = 'none';
+  artModal.style.alignItems = 'center';
+  artModal.style.justifyContent = 'center';
+  artModal.style.zIndex = 2000;
+  artModal.style.flexDirection = 'column';
+  artModal.style.backdropFilter = 'blur(2px)';
+  artModal.tabIndex = -1;
+  artModal.style.transition = 'opacity 0.2s';
+  artModal.style.fontFamily = 'Quicksand, sans-serif';
+  artModal.style.textAlign = 'center';
+  artModal.style.padding = '32px 0 0 0';
+  artModal.style.boxSizing = 'border-box';
+  artModal.style.overflowY = 'auto';
+  artModal.style.opacity = 0;
+  artModal.style.pointerEvents = 'none';
+  artModal.style.outline = 'none';
+  artModal.style.userSelect = 'none';
+  artModal.style.cursor = 'default';
+  artModal.style.gap = '24px';
+  artModal.style.flexDirection = 'column';
+  artModal.style.display = 'flex';
+  // Inner content
+  let artModalImg = document.createElement('img');
+  artModalImg.style.maxWidth = '80vw';
+  artModalImg.style.maxHeight = '60vh';
+  artModalImg.style.borderRadius = '16px';
+  artModalImg.style.boxShadow = '0 4px 32px rgba(209,107,165,0.18)';
+  artModalImg.style.margin = '0 auto 16px auto';
+  artModalImg.alt = '';
+  let artModalTitle = document.createElement('div');
+  artModalTitle.style.fontSize = '1.3rem';
+  artModalTitle.style.color = '#d16ba5';
+  artModalTitle.style.marginBottom = '12px';
+  let artModalClose = document.createElement('button');
+  artModalClose.textContent = 'close';
+  artModalClose.style.background = '#ffe0ef';
+  artModalClose.style.color = '#d16ba5';
+  artModalClose.style.border = '1px solid #d16ba5';
+  artModalClose.style.borderRadius = '999px';
+  artModalClose.style.padding = '10px 36px';
+  artModalClose.style.fontFamily = 'Quicksand, sans-serif';
+  artModalClose.style.fontSize = '1rem';
+  artModalClose.style.cursor = 'pointer';
+  artModalClose.style.margin = '0 auto';
+  artModalClose.style.display = 'flex';
+  artModalClose.style.alignItems = 'center';
+  artModalClose.style.justifyContent = 'center';
+  artModalClose.style.lineHeight = '1';
+  artModalClose.addEventListener('click', closeArtModal);
+  artModal.appendChild(artModalImg);
+  artModal.appendChild(artModalTitle);
+  artModal.appendChild(artModalClose);
+  document.body.appendChild(artModal);
+
+  function openArtModal(spot) {
+    artModalImg.src = spot.artSrc;
+    artModalImg.alt = spot.artTitle;
+    artModalTitle.textContent = spot.artTitle;
+    artModal.style.display = 'flex';
+    setTimeout(() => {
+      artModal.style.opacity = 1;
+      artModal.style.pointerEvents = 'auto';
+      artModal.focus();
+    }, 10);
+    document.body.style.overflow = 'hidden';
+    // Hide sidebar if present
+    var sidebar = document.getElementById('sidebar');
+    if (sidebar) sidebar.style.display = 'none';
+  }
+  function closeArtModal() {
+    artModal.style.opacity = 0;
+    artModal.style.pointerEvents = 'none';
+    setTimeout(() => {
+      artModal.style.display = 'none';
+      document.body.style.overflow = '';
+      // Show sidebar again if present
+      var sidebar = document.getElementById('sidebar');
+      if (sidebar) sidebar.style.display = '';
+    }, 200);
+  }
+  artModal.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' || e.key === 'Enter' || e.key === ' ') closeArtModal();
+  });
+
+  // Click/keyboard on art image in canvas
+  function getArtSpotAt(mx, my) {
+    for (const spot of room.spots) {
+      if (!spot.artTitle) continue;
+      const sx = spot.x;
+      const sy = spot.y;
+      const sw = spot.size;
+      const sh = spot.size;
+      if (mx >= sx && mx <= sx + sw && my >= sy && my <= sy + sh) {
+        return spot;
+      }
+    }
+    return null;
+  }
+  // Remove click-to-open for art spots; only allow Enter/Space when character is on spot
+  canvas.addEventListener('click', function(e) {
+    // Do nothing
+  });
+  // Track last hovered art spot for keyboard
+  canvas.addEventListener('mousemove', function(e) {
+    const rect = canvas.getBoundingClientRect();
+    const mx = (e.clientX - rect.left) * (room.width / rect.width);
+    const my = (e.clientY - rect.top) * (room.height / rect.height);
+    window.lastHoveredArtSpot = getArtSpotAt(mx, my);
+  });
+  // Close modal on overlay click (not image)
+  artModal.addEventListener('click', function(e) {
+    if (e.target === artModal) closeArtModal();
+  });
+
+  // Accessibility: trap focus in modal
+  artModal.addEventListener('focusout', function(e) {
+    if (!artModal.contains(e.relatedTarget)) {
+      setTimeout(() => artModal.focus(), 0);
+    }
+  });
+
+  let controlsEnabled = false;
+  const overlay = document.getElementById('hobby-room-overlay');
+  const startBtn = document.getElementById('hobby-room-start');
+  if (overlay && startBtn) {
+    overlay.style.display = 'block';
+    startBtn.style.display = 'inline-block';
+    startBtn.addEventListener('click', function() {
+      controlsEnabled = true;
+      overlay.style.display = 'none';
+      startBtn.style.display = 'none';
+      canvas.focus();
+    });
+  } else {
+    controlsEnabled = true;
+  }
+
+  document.addEventListener('keydown', function(e) {
+    if (!controlsEnabled) return;
+    if (["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"].includes(e.key)) {
+      e.preventDefault();
+      if (e.key === 'ArrowLeft') moveCharacter(-20, 0);
+      if (e.key === 'ArrowRight') moveCharacter(20, 0);
+      if (e.key === 'ArrowUp') moveCharacter(0, -20);
+      if (e.key === 'ArrowDown') moveCharacter(0, 20);
+    } else if (["Enter", " "].includes(e.key)) {
+      // Only open modal if character is on an art spot
+      if (currentSpot && currentSpot.artTitle) {
+        openArtModal(currentSpot);
+      }
+    }
+  });
+});
