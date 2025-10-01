@@ -1,3 +1,55 @@
+// Show art modal with image and title
+function showArtModal(spot) {
+  const modal = document.getElementById('hobby-art-modal');
+  const modalImg = document.getElementById('hobby-art-modal-img');
+  const modalTitle = document.getElementById('hobby-art-modal-title');
+  if (!modal || !modalImg || !modalTitle) return;
+  // Set image src (use images/ for art, assets/images/ for pixel art)
+  let imgSrc = '';
+  if (['iceland','rose','bobross'].includes(spot.name)) {
+    imgSrc = 'images/' + spot.img;
+  } else {
+    imgSrc = 'assets/images/' + spot.img;
+  }
+  modalImg.src = imgSrc;
+  modalTitle.textContent = spot.blurb;
+  modal.style.display = 'flex';
+  // Trap focus for accessibility
+  setTimeout(() => {
+    document.getElementById('hobby-art-modal-close').focus();
+  }, 100);
+}
+
+// Hide art modal
+function hideArtModal() {
+  const modal = document.getElementById('hobby-art-modal');
+  if (modal) modal.style.display = 'none';
+}
+  // Modal close button
+  const modalClose = document.getElementById('hobby-art-modal-close');
+  if (modalClose) {
+    modalClose.addEventListener('click', hideArtModal);
+  }
+  // Modal: close on Escape
+  document.addEventListener('keydown', function(e) {
+    const modal = document.getElementById('hobby-art-modal');
+    if (modal && modal.style.display === 'flex' && e.key === 'Escape') {
+      hideArtModal();
+    }
+  });
+
+  // Canvas: click to open art modal if hovering art
+  canvas.addEventListener('click', function(e) {
+    if (hoverArt && hoverArt.spot && hoverArt.spot.art) {
+      showArtModal(hoverArt.spot);
+    }
+  });
+  // Canvas: Enter key to open art modal if hovering art
+  canvas.addEventListener('keydown', function(e) {
+    if ((e.key === 'Enter' || e.key === ' ') && hoverArt && hoverArt.spot && hoverArt.spot.art) {
+      showArtModal(hoverArt.spot);
+    }
+  });
 // Cute pixel room for hobbies section
 // This script creates a simple interactive room with a character that can move between hobby spots.
 
@@ -7,15 +59,22 @@ const room = {
   spots: [
     { name: 'skateboard', x: 138, y: 193, img: 'hobby-skateboard.png', blurb: 'I love skateboarding whenever I can! Malmö is a great place for it.', size: 138 },
     { name: 'climbing', x: 371, y: 110, img: 'hobby-climbing.png', blurb: 'Bouldering is a fun way to stay active, especially in the winter when it\'s too cold to skate outside.', size: 83 },
+    // Art gallery objects (right side of room)
+    { name: 'iceland', x: 850, y: 80, img: 'iceland.JPG', blurb: 'oil painting - waterfall in iceland', size: 90, art: true },
+    { name: 'rose', x: 970, y: 180, img: 'rose.png', blurb: 'sketch - rose', size: 70, art: true },
+    { name: 'bobross', x: 900, y: 300, img: 'bobross.jpg', blurb: 'oil painting - the grandeur of summer (i followed a bob ross tutorial)', size: 90, art: true },
+    // The original art spot (for general art blurb)
     { name: 'art', x: 688, y: 234, img: 'hobby-art.png', blurb: 'I enjoy painting and drawing in my free time, especially landscapes.', size: 89 }
   ],
   character: { x: 69, y: 275, img: 'hobby-character.png', size: 193 }
 };
 
 // Shared, scaled drawing context (set in DOMContentLoaded)
-let hobbyCtx = null;
 
+let hobbyCtx = null;
 let currentSpot = null;
+let hoverArt = null;
+let hobbyTooltip = null;
 
 function drawRoom(ctx) {
   // Allow calling without passing ctx - use shared hobbyCtx
@@ -50,6 +109,17 @@ function drawRoom(ctx) {
     const dy = Math.round(spot.y + (spot.size - dh) / 2);
     ctx.drawImage(img, dx, dy, dw, dh);
   });
+  // Optionally draw hover highlight for art
+  if (hoverArt) {
+    ctx.save();
+    ctx.strokeStyle = '#d16ba5';
+    ctx.lineWidth = 4;
+    ctx.globalAlpha = 0.7;
+    ctx.beginPath();
+    ctx.arc(hoverArt.cx, hoverArt.cy, hoverArt.r, 0, 2 * Math.PI);
+    ctx.stroke();
+    ctx.restore();
+  }
   // Draw character
   const charImg = document.getElementById('img-character');
   if (charImg) {
@@ -117,6 +187,7 @@ function moveCharacter(dx, dy) {
   checkSpot();
 }
 
+
 document.addEventListener('DOMContentLoaded', function() {
   const canvas = document.getElementById('hobby-canvas');
   if (!canvas) return;
@@ -136,6 +207,63 @@ document.addEventListener('DOMContentLoaded', function() {
   hobbyCtx = ctx;
   drawRoom();
   checkSpot();
+
+  // Tooltip element
+  hobbyTooltip = document.createElement('div');
+  hobbyTooltip.style.position = 'fixed';
+  hobbyTooltip.style.pointerEvents = 'none';
+  hobbyTooltip.style.background = '#fff9fc';
+  hobbyTooltip.style.color = '#d16ba5';
+  hobbyTooltip.style.border = '1px solid #f3c6e7';
+  hobbyTooltip.style.borderRadius = '0.7em';
+  hobbyTooltip.style.padding = '0.3em 0.7em';
+  hobbyTooltip.style.fontFamily = 'Quicksand, sans-serif';
+  hobbyTooltip.style.fontSize = '1em';
+  hobbyTooltip.style.boxShadow = '0 2px 8px #f9c6e033';
+  hobbyTooltip.style.zIndex = 1000;
+  hobbyTooltip.style.opacity = 0;
+  hobbyTooltip.style.transition = 'opacity 0.15s';
+  document.body.appendChild(hobbyTooltip);
+
+  function getArtUnderMouse(mx, my) {
+    // Convert mouse px to canvas room coords
+    const rect = canvas.getBoundingClientRect();
+    const scaleX = room.width / rect.width;
+    const scaleY = room.height / rect.height;
+    const x = (mx - rect.left) * scaleX;
+    const y = (my - rect.top) * scaleY;
+    for (const spot of room.spots) {
+      if (!spot.art) continue;
+      // Circle hit area
+      const cx = spot.x + spot.size / 2;
+      const cy = spot.y + spot.size / 2;
+      const r = spot.size / 2;
+      if ((x - cx) * (x - cx) + (y - cy) * (y - cy) <= r * r) {
+        return { spot, cx, cy, r };
+      }
+    }
+    return null;
+  }
+
+  canvas.addEventListener('mousemove', function(e) {
+    const art = getArtUnderMouse(e.clientX, e.clientY);
+    if (art) {
+      hoverArt = art;
+      hobbyTooltip.textContent = art.spot.blurb;
+      hobbyTooltip.style.left = (e.clientX + 16) + 'px';
+      hobbyTooltip.style.top = (e.clientY - 8) + 'px';
+      hobbyTooltip.style.opacity = 1;
+    } else {
+      hoverArt = null;
+      hobbyTooltip.style.opacity = 0;
+    }
+    drawRoom();
+  });
+  canvas.addEventListener('mouseleave', function() {
+    hoverArt = null;
+    hobbyTooltip.style.opacity = 0;
+    drawRoom();
+  });
 
   let controlsEnabled = false;
   const overlay = document.getElementById('hobby-room-overlay');
