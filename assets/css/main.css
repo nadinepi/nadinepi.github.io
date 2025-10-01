@@ -4016,7 +4016,7 @@ input, select, textarea {
 			-ms-transition: color 0.2s ease;
 			transition: color 0.2s ease;
 			border: 0;
-			color: #b14a7a; /* slightly darker, warmer text color for nicer contrast */
+			color: #d16ba5;
 			display: block;
 			font-size: 1em;
 			font-weight: 700;
@@ -4042,12 +4042,12 @@ input, select, textarea {
 			}
 
 			#sidebar nav a:before {
-			   background: #fff0f6; /* very pale pink strip behind items */
+				   background: #f9c6e0;
 			}
 
-		 #sidebar nav a:after {
+	     #sidebar nav a:after {
 		     background-image: none;
-		     background-color: #ffeef8; /* softer highlight color */
+		     background-color: #ffe0ef;
 				-moz-transition: max-width 0.2s ease;
 				-webkit-transition: max-width 0.2s ease;
 				-ms-transition: max-width 0.2s ease;
@@ -4056,13 +4056,13 @@ input, select, textarea {
 			}
 
 			#sidebar nav a:hover {
-				   color: #5a3550; /* darker text on hover to reduce harsh white-on-pink */
-				   background: #ffdfee; /* lighter pink hover */
+				   color: #fff;
+				   background: #f6a6c5;
 			}
 
 			#sidebar nav a.active {
-				   color: #5a3550; /* darker text for active state */
-				   background: #f6a6c5; /* muted active pink instead of strong magenta */
+				   color: #fff;
+				   background: #d16ba5;
 			}
 
 				#sidebar nav a.active:after {
