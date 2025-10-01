@@ -3778,8 +3778,8 @@ input, select, textarea {
 
 	#sidebar {
 		padding: 2.5em 2.5em 0.5em 2.5em ;
-		/* softened sidebar background (less stark white) */
-		background: #fff6fb;
+	/* soft pink-tinted sidebar background */
+	background: #fff3f8;
 		/* remove rounded corners per user request to avoid corner artifact */
 		border-top-right-radius: 0;
 		border-bottom-right-radius: 0;
