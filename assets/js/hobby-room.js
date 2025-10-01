@@ -119,7 +119,7 @@ function checkSpot() {
     blurb.textContent = currentSpot.blurb;
     blurb.style.opacity = 1;
     if (currentSpot.artTitle) {
-      blurb.textContent += ' (press Enter to view)';
+      blurb.textContent += '\n(press Enter to view)';
     }
   } else {
     blurb.textContent = '';
