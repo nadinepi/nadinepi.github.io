@@ -2277,6 +2277,11 @@ input, select, textarea {
 	z-index: 3;
 	padding: 0.9em 2.4em;
 	font-size: 1.05em;
+	/* center text inside the button regardless of global line-height */
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	line-height: 1; /* reset so padding controls vertical centering */
 }
 
 		form > .fields {
