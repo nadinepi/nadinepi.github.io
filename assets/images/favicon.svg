@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+  <!-- much lighter pink background for better emoji contrast -->
+  <rect width="100%" height="100%" fill="#fff1f6" rx="12" />
+  <!-- subtle inner circle (slightly off-white) to help the emoji pop -->
+  <circle cx="32" cy="32" r="20" fill="#fffafa" />
+  <text x="50%" y="50%" font-size="34" text-anchor="middle" dominant-baseline="central">🌸</text>
+</svg>
