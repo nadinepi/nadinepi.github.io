@@ -3783,12 +3783,15 @@ input, select, textarea {
 		background: #ffe0ef;
 		border-top-right-radius: 2em;
 		border-bottom-right-radius: 2em;
+		/* Clip background to rounded corners and prevent child overflow showing a square */
+		overflow: hidden;
+		-webkit-background-clip: padding-box;
+		background-clip: padding-box;
 		box-shadow: 2px 0 16px 0 rgba(249,198,224,0.18);
 		cursor: default;
 		height: 100vh;
 		left: 0;
-		overflow-x: hidden;
-		overflow-y: auto;
+		overflow: visible; /* allow inner to handle scrolling so corners remain clipped */
 		position: fixed;
 		text-align: right;
 		top: 0;
@@ -3820,6 +3823,9 @@ input, select, textarea {
 			transition: opacity 1s ease;
 			min-height: 100%;
 			opacity: 1;
+			/* allow scrolling inside the inner container so the sidebar's rounded corners remain visible */
+			overflow-y: auto;
+			height: 100%;
 			width: 100%;
 		}
 
