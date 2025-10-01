@@ -9,11 +9,11 @@ const room = {
     { name: 'climbing', x: 371, y: 90, img: 'hobby-climbing.png', blurb: 'Bouldering is a fun way to stay active, especially in the winter when it\'s too cold to skate outside.', size: 83 },
     { name: 'art', x: 600, y: 234, img: 'hobby-art.png', blurb: 'I enjoy painting and drawing in my free time, especially landscapes.', size: 89 },
     // Artworks on the right side of the room
-    { name: 'iceland', x: 700, y: 80, img: 'iceland.JPG', blurb: 'oil painting - waterfall in iceland', size: 90, artTitle: 'Waterfall in Iceland', artSrc: 'images/iceland.JPG' },
+    { name: 'iceland', x: 750, y: 80, img: 'iceland.JPG', blurb: 'oil painting - waterfall in iceland', size: 90, artTitle: 'Waterfall in Iceland', artSrc: 'images/iceland.JPG' },
     { name: 'rose', x: 1000, y: 200, img: 'rose.png', blurb: 'sketch - rose', size: 70, artTitle: 'Rose Sketch', artSrc: 'images/rose.png' },
     { name: 'bobross', x: 800, y: 320, img: 'bobross.jpg', blurb: 'oil painting - the grandeur of summer (i followed a bob ross tutorial :) )', size: 90, artTitle: 'The Grandeur of Summer', artSrc: 'images/bobross.jpg' }
   ],
-  character: { x: 69, y: 275, img: 'hobby-character.png', size: 193 }
+  character: { x: 69, y: 275, img: 'hobby-character.png', size: 168 }
 };
 
 // Shared, scaled drawing context (set in DOMContentLoaded)
@@ -118,6 +118,9 @@ function checkSpot() {
   if (currentSpot) {
     blurb.textContent = currentSpot.blurb;
     blurb.style.opacity = 1;
+    if (currentSpot.artTitle) {
+      blurb.textContent += ' (press Enter to view)';
+    }
   } else {
     blurb.textContent = '';
     blurb.style.opacity = 0;
@@ -265,21 +268,14 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     return null;
   }
+  // Remove click-to-open for art spots; only allow Enter/Space when character is on spot
   canvas.addEventListener('click', function(e) {
-    const rect = canvas.getBoundingClientRect();
-    const mx = (e.clientX - rect.left) * (room.width / rect.width);
-    const my = (e.clientY - rect.top) * (room.height / rect.height);
-    const spot = getArtSpotAt(mx, my);
-    if (spot) {
-      openArtModal(spot);
-    }
+    // Do nothing
   });
-  // Keyboard accessibility: Enter/Space opens modal if hovered
   canvas.addEventListener('keydown', function(e) {
     if (!['Enter', ' '].includes(e.key)) return;
-    // Use last hovered art spot
-    if (window.lastHoveredArtSpot) {
-      openArtModal(window.lastHoveredArtSpot);
+    if (currentSpot && currentSpot.artTitle) {
+      openArtModal(currentSpot);
     }
   });
   // Track last hovered art spot for keyboard
