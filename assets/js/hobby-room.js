@@ -33,14 +33,20 @@ function drawRoom(ctx) {
   ctx.fillRect(0, 0, room.width, room.height);
   // Draw spots
   room.spots.forEach(spot => {
-    const img = document.getElementById('img-' + spot.name);
+    let img = document.getElementById('img-' + spot.name);
+    // For art images, dynamically create and cache image if not present
+    if (!img && spot.artSrc) {
+      img = new window.Image();
+      img.src = spot.artSrc;
+      img.id = 'img-' + spot.name;
+      img.style.display = 'none';
+      document.body.appendChild(img);
+    }
     if (!img) return;
-    // If image not loaded yet, redraw when it loads
     if (!img.complete) {
       img.onload = () => drawRoom();
       return;
     }
-    // preserve aspect ratio and center within spot box
     const iw = img.naturalWidth || img.width;
     const ih = img.naturalHeight || img.height;
     if (!iw || !ih) {
