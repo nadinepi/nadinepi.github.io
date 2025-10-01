@@ -214,7 +214,7 @@ document.addEventListener('DOMContentLoaded', function() {
   artModalTitle.style.marginBottom = '12px';
   let artModalClose = document.createElement('button');
   artModalClose.textContent = 'close';
-  artModalClose.style.background = '#fff9fc';
+  artModalClose.style.background = '#ffe0ef';
   artModalClose.style.color = '#d16ba5';
   artModalClose.style.border = '1px solid #d16ba5';
   artModalClose.style.borderRadius = '999px';
