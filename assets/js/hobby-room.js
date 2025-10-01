@@ -245,6 +245,9 @@ document.addEventListener('DOMContentLoaded', function() {
       artModal.focus();
     }, 10);
     document.body.style.overflow = 'hidden';
+    // Hide sidebar if present
+    var sidebar = document.getElementById('sidebar');
+    if (sidebar) sidebar.style.display = 'none';
   }
   function closeArtModal() {
     artModal.style.opacity = 0;
@@ -252,6 +255,9 @@ document.addEventListener('DOMContentLoaded', function() {
     setTimeout(() => {
       artModal.style.display = 'none';
       document.body.style.overflow = '';
+      // Show sidebar again if present
+      var sidebar = document.getElementById('sidebar');
+      if (sidebar) sidebar.style.display = '';
     }, 200);
   }
   artModal.addEventListener('keydown', function(e) {
