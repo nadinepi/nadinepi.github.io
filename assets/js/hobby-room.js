@@ -2,14 +2,14 @@
 // This script creates a simple interactive room with a character that can move between hobby spots.
 
 const room = {
-  width: 800,
-  height: 350,
+  width: 1100,
+  height: 481,
   spots: [
-    { name: 'skateboard', x: 100, y: 140, img: 'hobby-skateboard.png', blurb: 'I love skateboarding whenever I can! Malmö is a great place for it.', size: 100 },
-    { name: 'climbing', x: 270, y: 80, img: 'hobby-climbing.png', blurb: 'Bouldering is a fun way to stay active, especially in the winter when it\'s too cold to skate outside.', size: 60 },
-    { name: 'art', x: 500, y: 170, img: 'hobby-art.png', blurb: 'I enjoy painting and drawing in my free time, especially landscapes.', size: 65 }
+    { name: 'skateboard', x: 138, y: 193, img: 'hobby-skateboard.png', blurb: 'I love skateboarding whenever I can! Malmö is a great place for it.', size: 138 },
+    { name: 'climbing', x: 371, y: 110, img: 'hobby-climbing.png', blurb: 'Bouldering is a fun way to stay active, especially in the winter when it\'s too cold to skate outside.', size: 83 },
+    { name: 'art', x: 688, y: 234, img: 'hobby-art.png', blurb: 'I enjoy painting and drawing in my free time, especially landscapes.', size: 89 }
   ],
-  character: { x: 50, y: 200, img: 'hobby-character.png', size: 140 }
+  character: { x: 69, y: 275, img: 'hobby-character.png', size: 193 }
 };
 
 // Shared, scaled drawing context (set in DOMContentLoaded)
