@@ -1844,6 +1844,7 @@ input, select, textarea {
 		transition: transform 120ms ease, box-shadow 120ms ease, background-color 120ms ease;
 		cursor: pointer;
 		display: inline-block;
+		font-family: 'Quicksand', 'Poppins', 'Comic Sans MS', cursive, sans-serif;
 		font-size: 0.78em;
 		font-weight: bold;
 		height: calc(3.25em + 2px);
