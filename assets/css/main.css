@@ -4048,7 +4048,7 @@ input, select, textarea {
 
 	     #sidebar nav a:after {
 		     background-image: none;
-		     background-color: #ffe0ef;
+		     background-color: #ffc6e2;
 				-moz-transition: max-width 0.2s ease;
 				-webkit-transition: max-width 0.2s ease;
 				-ms-transition: max-width 0.2s ease;
@@ -4063,7 +4063,7 @@ input, select, textarea {
 
 			#sidebar nav a.active {
 				   color: #fff;
-				   background: #d16ba5;
+				   background: #f16faa;
 			}
 
 				#sidebar nav a.active:after {
