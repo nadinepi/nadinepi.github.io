@@ -272,12 +272,6 @@ document.addEventListener('DOMContentLoaded', function() {
   canvas.addEventListener('click', function(e) {
     // Do nothing
   });
-  canvas.addEventListener('keydown', function(e) {
-    if (!['Enter', ' '].includes(e.key)) return;
-    if (currentSpot && currentSpot.artTitle) {
-      openArtModal(currentSpot);
-    }
-  });
   // Track last hovered art spot for keyboard
   canvas.addEventListener('mousemove', function(e) {
     const rect = canvas.getBoundingClientRect();
@@ -355,6 +349,11 @@ document.addEventListener('DOMContentLoaded', function() {
       if (e.key === 'ArrowRight') moveCharacter(20, 0);
       if (e.key === 'ArrowUp') moveCharacter(0, -20);
       if (e.key === 'ArrowDown') moveCharacter(0, 20);
+    } else if (["Enter", " "].includes(e.key)) {
+      // Only open modal if character is on an art spot
+      if (currentSpot && currentSpot.artTitle) {
+        openArtModal(currentSpot);
+      }
     }
   });
 });
