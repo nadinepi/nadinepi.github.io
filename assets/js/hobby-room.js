@@ -21,8 +21,6 @@ let hobbyCtx = null;
 
 let currentSpot = null;
 
-// Tooltip element for art hover
-let artTooltip = null;
 
 function drawRoom(ctx) {
   // Allow calling without passing ctx - use shared hobbyCtx
