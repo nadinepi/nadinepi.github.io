@@ -3788,7 +3788,8 @@ input, select, textarea {
 		overflow: hidden;
 		-webkit-background-clip: padding-box;
 		background-clip: padding-box;
-		box-shadow: 6px 0 28px -6px rgba(0,0,0,0.18), 2px 0 16px 0 rgba(249,198,224,0.18);
+		/* neutral soft shadow for flat look */
+		box-shadow: 4px 0 18px -6px rgba(0,0,0,0.12);
 		cursor: default;
 		height: 100vh;
 		left: 0;
@@ -3804,16 +3805,8 @@ input, select, textarea {
 
 	/* separator line to visually separate sidebar from content on wide screens */
 	@media screen and (min-width: 1281px) {
-		#sidebar:after {
-			content: '';
-			position: absolute;
-			top: 0;
-			right: -1px;
-			width: 1px;
-			height: 100%;
-			background: linear-gradient(to bottom, rgba(255,255,255,0.12), rgba(209,107,165,0.06));
-			pointer-events: none;
-			z-index: 10001;
+		#sidebar {
+			border-right: 1px solid rgba(255,255,255,0.08); /* subtle flat separator */
 		}
 	}
 
