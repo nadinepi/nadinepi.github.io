@@ -97,9 +97,9 @@ input, select, textarea {
 		box-sizing: inherit;
 	}
 
- 	body {
- 		background: #fff4fa; /* flat pale pink background */
- 	}
+	body {
+		background: #000000;
+	}
 
 		body.is-preload *, body.is-preload *:before, body.is-preload *:after {
 			-moz-animation: none !important;
@@ -115,8 +115,8 @@ input, select, textarea {
 /* Type */
 
 	body, input, select, textarea {
-		color: #5a3550;
-		font-family: 'Quicksand', 'Poppins', 'Comic Sans MS', cursive, sans-serif;
+		color: rgba(255, 255, 255, 0.55);
+		font-family: Arial, Helvetica, sans-serif;
 		font-size: 16.5pt;
 		font-weight: normal;
 		line-height: 1.75;
@@ -151,14 +151,14 @@ input, select, textarea {
 		-webkit-transition: color 0.2s ease, border-bottom-color 0.2s ease;
 		-ms-transition: color 0.2s ease, border-bottom-color 0.2s ease;
 		transition: color 0.2s ease, border-bottom-color 0.2s ease;
-		border-bottom: 2px dotted #f9c6e0;
-		color: #f6a6c5;
+		border-bottom: dotted 1px rgba(255, 255, 255, 0.35);
+		color: inherit;
 		text-decoration: none;
 	}
 
 		a:hover {
-			   border-bottom-color: #d16ba5;
-			   color: #d16ba5;
+			border-bottom-color: transparent;
+			color: #ffffff;
 		}
 
 	strong, b {
@@ -175,13 +175,8 @@ input, select, textarea {
 	}
 
 	h1, h2, h3, h4, h5, h6 {
-		color: #d16b9c;
-		font-family: 'Quicksand', 'Poppins', 'Comic Sans MS', cursive, sans-serif;
+		color: #ffffff;
 		font-weight: bold;
-		border-radius: 12px;
-		background: #fff0f6;
-		padding: 0.3em 0.8em;
-		box-shadow: 0 2px 8px rgba(209,107,165,0.08);
 		line-height: 1.5;
 		margin: 0 0 0.5em 0;
 	}
@@ -202,8 +197,10 @@ input, select, textarea {
 		}
 
 			h1.major:after {
-				background-image: none;
-				background-color: #d16ba5;
+				background-image: -moz-linear-gradient(to right, #5e42a6, #b74e91);
+				background-image: -webkit-linear-gradient(to right, #5e42a6, #b74e91);
+				background-image: -ms-linear-gradient(to right, #5e42a6, #b74e91);
+				background-image: linear-gradient(to right, #5e42a6, #b74e91);
 				-moz-transition: max-width 0.2s ease;
 				-webkit-transition: max-width 0.2s ease;
 				-ms-transition: max-width 0.2s ease;
@@ -1801,10 +1798,8 @@ input, select, textarea {
 /* Box */
 
 	.box {
-		border-radius: 18px;
-		border: solid 1px #f9c6e0;
-		box-shadow: 0 2px 12px rgba(249,198,224,0.12);
-		background: #fff8fb;
+		border-radius: 0.25em;
+		border: solid 1px rgba(255, 255, 255, 0.15);
 		margin-bottom: 2em;
 		padding: 1.5em;
 	}
@@ -1836,26 +1831,24 @@ input, select, textarea {
 		-webkit-transition: border-color 0.2s ease;
 		-ms-transition: border-color 0.2s ease;
 		transition: border-color 0.2s ease;
-		background-color: #fff0f6;
-		border: none !important;
-		border-radius: 9999px; /* pill-shaped */
-		color: #5a3550 !important;
-		box-shadow: 0 6px 18px rgba(209,107,165,0.08);
-		transition: transform 120ms ease, box-shadow 120ms ease, background-color 120ms ease;
+		background-color: transparent;
+		border: solid 1px !important;
+		border-color: rgba(255, 255, 255, 0.15) !important;
+		border-radius: 3em;
+		color: #ffffff !important;
 		cursor: pointer;
 		display: inline-block;
-		font-family: 'Quicksand', 'Poppins', 'Comic Sans MS', cursive, sans-serif;
-		font-size: 0.78em;
+		font-size: 0.6em;
 		font-weight: bold;
-		height: calc(3.25em + 2px);
-		letter-spacing: 0.08em;
-		line-height: 3.25em;
+		height: calc(4.75em + 2px);
+		letter-spacing: 0.25em;
+		line-height: 4.75em;
 		outline: 0;
-		padding: 0 2.25em;
+		padding: 0 3.75em;
 		position: relative;
 		text-align: center;
 		text-decoration: none;
-		text-transform: lowercase;
+		text-transform: uppercase;
 		white-space: nowrap;
 	}
 
@@ -1905,7 +1898,7 @@ input, select, textarea {
 		input[type="button"].small,
 		button.small,
 		.button.small {
-			font-size: 0.65em;
+			font-size: 0.4em;
 		}
 
 		input[type="submit"].large,
@@ -1913,7 +1906,7 @@ input, select, textarea {
 		input[type="button"].large,
 		button.large,
 		.button.large {
-			font-size: 0.95em;
+			font-size: 0.8em;
 		}
 
 		input[type="submit"].primary,
@@ -1921,8 +1914,8 @@ input, select, textarea {
 		input[type="button"].primary,
 		button.primary,
 		.button.primary {
-			background-color: #f6a6c5;
-			color: #ffffff !important;
+			background-color: #ffffff;
+			color: #312450 !important;
 		}
 
 			input[type="submit"].primary:after,
@@ -1952,9 +1945,7 @@ input, select, textarea {
 		input[type="button"]:hover,
 		button:hover,
 		.button:hover {
-			transform: translateY(-2px);
-			box-shadow: 0 12px 30px rgba(209,107,165,0.12);
-			background-color: #ffd9ec; /* subtle darker pink */
+			border-color: rgba(255, 255, 255, 0.55) !important;
 		}
 
 			input[type="submit"]:hover:after,
@@ -2238,51 +2229,6 @@ input, select, textarea {
 		form > :last-child {
 			margin-bottom: 0;
 		}
-/* Hobby room responsive wrapper tweaks */
-#hobby-canvas-wrapper {
-    box-sizing: border-box;
-    overflow: hidden; /* prevent internal drawing from creating scroll/shift */
-    margin: 0 auto;
-    width: 100%;
-    max-width: 1100px;
-}
-
-/* Make the hobby room maintain the canvas aspect ratio and scale responsively */
-#hobby-canvas-wrapper {
-	aspect-ratio: 1100 / 481; /* width / height */
-	position: relative;
-}
-
-#hobby-canvas-wrapper canvas {
-	width: 100% !important;
-	height: 100% !important;
-	display: block;
-	border-radius: 1.5em;
-}
-
-#hobby-room-overlay {
-	position: absolute;
-	left: 0;
-	top: 0;
-	width: 100%;
-	height: 100%;
-	border-radius: 1.5em;
-}
-
-#hobby-room-start {
-	position: absolute;
-	left: 50%;
-	top: 50%;
-	transform: translate(-50%, -50%);
-	z-index: 3;
-	padding: 0.9em 2.4em;
-	font-size: 1.05em;
-	/* center text inside the button regardless of global line-height */
-	display: inline-flex;
-	align-items: center;
-	justify-content: center;
-	line-height: 1; /* reset so padding controls vertical centering */
-}
 
 		form > .fields {
 			display: -moz-flex;
@@ -2620,9 +2566,6 @@ input, select, textarea {
 		border: 0;
 		display: inline-block;
 		position: relative;
-		/* Default inner padding so images don't touch nearby elements */
-		padding: 0.6em;
-		box-sizing: border-box;
 	}
 
 		.image img {
@@ -2640,23 +2583,20 @@ input, select, textarea {
 
 		.image.left {
 			float: left;
-			margin: 0 0.6em 1em 0;
+			margin: 0 1.5em 1em 0;
 			top: 0.25em;
 		}
 
 		.image.right {
 			float: right;
-			margin: 0 0 1em 0.6em;
+			margin: 0 0 1em 1.5em;
 			top: 0.25em;
 		}
 
-		/* Full-bleed variants should not have inner padding */
 		.image.fit {
 			display: block;
 			margin: 0 0 2em 0;
 			width: 100%;
-			padding: 0; /* remove default padding */
-			box-sizing: border-box;
 		}
 
 			.image.fit img {
@@ -2667,8 +2607,6 @@ input, select, textarea {
 			display: block;
 			margin: 0 0 3em 0;
 			width: 100%;
-			padding: 0; /* remove default padding for main images */
-			box-sizing: border-box;
 		}
 
 			.image.main img {
@@ -3060,220 +2998,42 @@ input, select, textarea {
 		min-height: 22.5em;
 	}
 
-	/* Ensure spotlight image and content are vertically centered */
-	.spotlights > section {
-		align-items: center;
-	}
-
-	/* Prevent JS from using the image as a full-section background here; keep only the <img> element visible */
-	.spotlights > section > .image {
-		background-image: none !important;
-		background-size: auto !important;
-		background-position: center !important;
-		display: -webkit-flex; /* keep as a flex container so img can be centered */
-		display: -ms-flexbox;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		transition: opacity 0.6s ease, transform 0.6s ease;
-	}
-
 		body.is-ie .spotlights > section {
 			min-height: 0;
 		}
 
-		.spotlights > section > .image img {
-			/* make portrait a fixed circular avatar and ensure it's visible */
-			width: 180px;
-			height: 180px;
-			max-width: 100%;
-			max-height: 100%;
-			object-fit: cover;
-			margin: 0 auto;
-			display: block !important;
-			opacity: 1 !important;
-			visibility: visible !important;
+		.spotlights > section > .image {
+			background-position: center center;
+			background-size: cover;
+			border-radius: 0;
+			display: block;
 			position: relative;
-			z-index: 2; /* sit above the pseudo-overlay */
-			border-radius: 50%; /* circular */
+			width: 25em;
 		}
 
-		/* When sections are inactive (before scrollex enters), keep image faded/shifted
-		   using the same circular presentation so the animation won't show a square */
-		.spotlights > section.inactive > .image,
-		body.is-preload .spotlights > section > .image {
-			opacity: 0;
-			transform: translateY(1em);
-		}
+			.spotlights > section > .image img {
+				border-radius: 0;
+				display: block;
+			}
 
-		.spotlights > section.inactive > .image img,
-		body.is-preload .spotlights > section > .image img {
-			opacity: 0;
-			transform: scale(0.95);
-		}
-
-		.spotlights > section > .content > .inner {
-			transition: opacity 0.6s ease, transform 0.6s ease;
-		}
-
-	/* About section header styling */
-	/* Left-accent heading style: small colored bar to the left of the heading text */
-	.wrapper .inner > h2 {
-		position: relative;
-		display: inline-block; /* only as wide as the text */
-		padding-left: 1.6em; /* room for the accent */
-		background: none !important; /* override previous full-width rules */
-		width: auto !important;
-		color: inherit;
-		margin-bottom: 0.8em;
-		border-radius: 0;
-		box-shadow: none !important;
-	}
-
-	.wrapper .inner > h2:before {
-		content: '';
-		position: absolute;
-		left: 0;
-		top: 50%;
-		transform: translateY(-50%);
-		width: 8px;
-		height: 60%;
-		background: #f6a6c5; /* accent color */
-		border-radius: 4px;
-	}
-
-	@media screen and (max-width: 736px) {
-		.wrapper .inner > h2 {
-			padding-left: 1.1em;
-		}
-
-		.wrapper .inner > h2:before {
-			width: 6px;
-			height: 56%;
-			border-radius: 3px;
-		}
-	}
-
-	/* Ensure any earlier full-width header rules on #one and #three are reset */
-	/* Reset previous full-width styles but keep heading padding so the accent doesn't overlap */
-	#one .content .inner h2,
-	#three .inner h2 {
-		background: none !important;
-		box-shadow: none !important;
-		width: auto !important;
-		/* keep normal padding so the accent sits to the left of the first letter */
-	}
-
-	/* Slightly thinner accent and slightly more left padding for consistent spacing */
-	.wrapper .inner > h2 {
-		padding-left: 0.6em; /* slightly increased space for the accent */
-	}
-
-	.wrapper .inner > h2:before {
-		width: 6px; /* thinner accent */
-		height: 56%;
-		border-radius: 3px;
-	}
-
-	/* Add padding and a subtle white ring so the circular avatar has breathing room */
-	.spotlights > section > .image {
-		padding: 0.8em; /* space around the circular image */
-		box-sizing: content-box;
-		position: relative; /* needed so :before can be centered */
-	}
-
-	.spotlights > section > .image img {
-		border: 5px solid #fff; /* white ring */
-		box-shadow: 0 6px 20px rgba(209,107,165,0.12);
-	}
-
-			/* Make the decorative overlay circular and centered so it doesn't flash as a square */
 			.spotlights > section > .image:before {
-				content: '';
-				position: absolute;
-				top: 50%;
-				left: 50%;
-				transform: translate(-50%, -50%);
+				-moz-transition: opacity 1s ease;
+				-webkit-transition: opacity 1s ease;
+				-ms-transition: opacity 1s ease;
+				transition: opacity 1s ease;
 				background: rgba(49, 36, 80, 0.9);
-				border-radius: 50%;
-				width: 180px;
-				height: 180px;
-				opacity: 0; /* hidden by default */
-				z-index: 1;
-				transition: opacity 0.6s ease, transform 0.3s ease, width 0.3s ease, height 0.3s ease;
-			}
-
-			/* Match the pseudo-element size to the responsive avatar sizes */
-			@media screen and (max-width: 736px) {
-				.spotlights > section > .image:before {
-					width: 120px;
-					height: 120px;
-				}
-			}
-
-			@media screen and (min-width: 737px) and (max-width: 980px) {
-				.spotlights > section > .image:before {
-					width: 140px;
-					height: 140px;
-				}
-			}
-
-			@media screen and (min-width: 981px) {
-				.spotlights > section > .image:before {
-					width: 180px;
-					height: 180px;
-				}
-			}
-
-			/* Desktop: give spotlight images outer breathing room */
-			@media screen and (min-width: 981px) {
-				.spotlights > section > .image {
-					margin-right: 2.2em;
-				}
-				/* If layout reverses, ensure image still has space (covers both cases) */
-				.spotlights > section:nth-child(odd) > .image {
-					margin-left: 2.2em;
-					margin-right: 0;
-				}
-
-				/* Move avatar toward the top third of the section on wide screens */
-				.spotlights > section:not(.inactive) > .image {
-					align-self: flex-start;
-					/* shift down slightly to compensate for the image being aligned by its center */
-					transform: translateY(30%);
-				}
-
-				/* Keep inactive (pre-enter) behavior unchanged; it uses translateY(1em) */
-				.spotlights > section.inactive > .image {
-					/* ensure the inactive rule has lower precedence so it wins when present */
-					transform: translateY(1em) !important;
-				}
+				content: '';
+				display: block;
+				height: 100%;
+				left: 0;
+				opacity: 0;
+				position: absolute;
+				top: 0;
+				width: 100%;
 			}
 
 		.spotlights > section > .content {
-
-		/* Responsive avatar sizes */
-		@media screen and (max-width: 736px) {
-		    .spotlights > section > .image img {
-		        width: 120px;
-		        height: 120px;
-		    }
-		}
-
-		@media screen and (min-width: 737px) and (max-width: 980px) {
-		    .spotlights > section > .image img {
-		        width: 140px;
-		        height: 140px;
-		    }
-		}
-
-		@media screen and (min-width: 981px) {
-		    .spotlights > section > .image img {
-		        width: 180px;
-		        height: 180px;
-		    }
-		}
-			padding: 3.2em 2.2em 2em 2.2em ;
+			padding: 4em 5em 2em 5em ;
 			display: -moz-flex;
 			display: -webkit-flex;
 			display: -ms-flex;
@@ -3287,7 +3047,6 @@ input, select, textarea {
 			-ms-justify-content: center;
 			justify-content: center;
 			width: 50em;
-			flex: 1;
 			-ms-flex: 1;
 		}
 
@@ -3314,8 +3073,6 @@ input, select, textarea {
 		.spotlights > section.inactive > .image:before,
 		body.is-preload .spotlights > section > .image:before {
 			opacity: 1;
-			transform: translate(-50%, -50%) scale(1);
-			border-radius: 50%;
 		}
 
 		.spotlights > section.inactive > .content > .inner,
@@ -3330,7 +3087,7 @@ input, select, textarea {
 		@media screen and (max-width: 1680px) {
 
 			.spotlights > section > .content {
-				padding: 3.2em 2em 1.6em 2em ;
+				padding: 4em 4em 2em 4em ;
 			}
 
 		}
@@ -3344,7 +3101,6 @@ input, select, textarea {
 				.spotlights > section > .image {
 					width: 100%;
 					height: 50vh;
-					padding: 1em; /* ensure inner breathing room on narrow screens */
 				}
 
 				.spotlights > section > .content {
@@ -3486,59 +3242,9 @@ input, select, textarea {
 			background-attachment: fixed;
 			background-size: 120%;
 			background-repeat: no-repeat;
-			background-image: none;
-			background-position: center;
-			background-color: #ffe0ef;
-/* Cute flower accent (example, can be used in HTML): */
-.flower-accent {
-	display: inline-block;
-	width: 32px;
-	height: 32px;
-	background: url('../images/forgetmenot.png') no-repeat center center/contain;
-	vertical-align: middle;
-	margin: 0 0.3em;
-}
-
-/* Stronger contrast for action buttons inside spotlights content */
-.spotlights > section > .content .button {
-	background-color: #f6a6c5; /* make them primary pink to stand out */
-	color: #ffffff !important;
-	box-shadow: 0 12px 30px rgba(209,107,165,0.16);
-	border: none !important;
-}
-
-/* If you want only the resume button to be emphasized, use .highlight-button on that link in HTML */
-
-/* Page-specific overrides */
-/* Keep the intro (home) button hover high-contrast against the background */
-#intro .button:hover,
-#intro .button:focus {
-	background-color: #f6a6c5; /* use primary pink so it stands out */
-	color: #ffffff !important;
-	box-shadow: 0 12px 30px rgba(209,107,165,0.18);
-	transform: translateY(-2px);
-}
-
-/* Improve contrast for headings and pale buttons when inside light/white sections */
-/* Scoped to style2/style2-alt/style3 wrappers so overall theme isn't affected */
-.wrapper.style2 h1, .wrapper.style2 h2,
-.wrapper.style2-alt h1, .wrapper.style2-alt h2,
-.wrapper.style3 h1, .wrapper.style3 h2 {
-	/* slightly richer background and subtle border to lift headings off pale sections */
-	background: #fff0f6;
-	border: 1px solid rgba(209,107,165,0.06);
-	box-shadow: 0 6px 20px rgba(209,107,165,0.12);
-}
-
-.wrapper.style2 .button,
-.wrapper.style2-alt .button,
-.wrapper.style3 .button {
-	/* non-primary buttons get a tad more contrast on pale wrappers */
-	background-color: #ffeef6;
-	border: 1px solid rgba(209,107,165,0.07) !important;
-	box-shadow: 0 8px 24px rgba(209,107,165,0.10);
-	color: #5a3550 !important;
-}
+			background-image: url(../../images/pinkflower.jpg);
+			background-position: -17% 30%;
+			background-color: #000000;
 		}
 
 		.wrapper.style1-alt {
@@ -3546,21 +3252,21 @@ input, select, textarea {
 		}
 
 		.wrapper.style2 {
-			background-color: #fff0f6;
+			background-color: #292e2d;
 		}
 
 		.wrapper.style2-alt {
-			background-color: #ffe0ef;
+			background-color: #ffffff1a;
 		}
 
 		.wrapper.style3 {
-			background-color: #f9c6e0;
+			background-color: #9c9c9c34;
 			margin-bottom: 0%;
 			padding-bottom: 0%;
 		}
 
 		.wrapper.style3-alt {
-			background-color: #f7b6d2;
+			background-color: #953d75;
 		}
 
 		.wrapper.fullscreen {
@@ -3824,36 +3530,17 @@ input, select, textarea {
 
 	#sidebar {
 		padding: 2.5em 2.5em 0.5em 2.5em ;
-	/* very pale pink sidebar (lighter than the home page) */
-	background: #ffebf4;
-		/* remove rounded corners per user request to avoid corner artifact */
-		border-top-right-radius: 0;
-		border-bottom-right-radius: 0;
-		/* Clip background to rounded corners and prevent child overflow showing a square */
-		overflow: hidden;
-		-webkit-background-clip: padding-box;
-		background-clip: padding-box;
-		/* neutral soft shadow for flat look */
-		box-shadow: 4px 0 18px -6px rgba(0,0,0,0.12);
+		background: #000000;
 		cursor: default;
 		height: 100vh;
 		left: 0;
-		/* Allow inner to handle scrolling; keep overflow hidden here so rounded corners clip children */
-		-webkit-overflow-scrolling: touch;
+		overflow-x: hidden;
+		overflow-y: auto;
 		position: fixed;
 		text-align: right;
 		top: 0;
 		width: 18em;
 		z-index: 10000;
-		font-family: 'Quicksand', 'Poppins', 'Comic Sans MS', cursive, sans-serif;
-	}
-
-	/* separator line to visually separate sidebar from content on wide screens */
-	@media screen and (min-width: 1281px) {
-		/* border removed per user request so the sidebar reads softer against the page */
-		#sidebar {
-			border-right: none;
-		}
 	}
 
 		#sidebar > .inner {
@@ -3879,13 +3566,7 @@ input, select, textarea {
 			transition: opacity 1s ease;
 			min-height: 100%;
 			opacity: 1;
-			/* allow scrolling inside the inner container so the sidebar's rounded corners remain visible */
-			overflow-y: auto;
-			height: 100%;
 			width: 100%;
-			background: transparent; /* ensure no rectangular background shows */
-			position: relative; /* create stacking context */
-			z-index: 1;
 		}
 
 			body.is-ie #sidebar > .inner {
@@ -4062,19 +3743,17 @@ input, select, textarea {
 			-ms-transition: color 0.2s ease;
 			transition: color 0.2s ease;
 			border: 0;
-			color: #d16ba5;
+			color: rgba(255, 255, 255, 0.35);
 			display: block;
-			font-size: 1em;
-			font-weight: 700;
-			letter-spacing: 0.1em;
+			font-size: 0.6em;
+			font-weight: bold;
+			letter-spacing: 0.25em;
 			line-height: 1.75;
 			outline: 0;
-			padding: 1.1em 1.5em 1.1em 0.8em;
+			padding: 1.35em 0;
 			position: relative;
 			text-decoration: none;
-			text-transform: none;
-			border-radius: 1em;
-			transition: background 0.2s, color 0.2s;
+			text-transform: uppercase;
 		}
 
 			#sidebar nav a:before, #sidebar nav a:after {
@@ -4088,12 +3767,14 @@ input, select, textarea {
 			}
 
 			#sidebar nav a:before {
-				   background: #f9c6e0;
+				background: #47204d;
 			}
 
-	     #sidebar nav a:after {
-		     background-image: none;
-		     background-color: #ffc6e2;
+			#sidebar nav a:after {
+				background-image: -moz-linear-gradient(to right, #28324d, #b74e91);
+				background-image: -webkit-linear-gradient(to right, #28324d, #b74e91);
+				background-image: -ms-linear-gradient(to right, #28324d, #b74e91);
+				background-image: linear-gradient(to right, #28324d, #b74e91);
 				-moz-transition: max-width 0.2s ease;
 				-webkit-transition: max-width 0.2s ease;
 				-ms-transition: max-width 0.2s ease;
@@ -4102,13 +3783,11 @@ input, select, textarea {
 			}
 
 			#sidebar nav a:hover {
-				   color: #fff;
-				   background: #f6a6c5;
+				color: rgba(255, 255, 255, 0.55);
 			}
 
 			#sidebar nav a.active {
-				   color: #fff;
-				   background: #d65f99;
+				color: #ffffff;
 			}
 
 				#sidebar nav a.active:after {
@@ -4255,10 +3934,7 @@ input, select, textarea {
 		.project img {
 			position: absolute;
 			opacity: 0.9;
-			display: block !important;
-			visibility: visible !important;
-			opacity: 0.95 !important;
-		}
+	   }
 		.project p {
 			position: absolute;
 			text-align: center;
@@ -4329,27 +4005,30 @@ input, select, textarea {
 
 
 	   .typewriter {
-		font-family: 'Quicksand', 'Poppins', 'Comic Sans MS', cursive, sans-serif;
+		font-family: 'Monaco', 'Trebuchet MS', 'Verdana', Cursive;
 		display: inline-block;
-		font-size: 1.5em;
-		margin-bottom: 1em;
+		font-size: 15px;
 	}
 	
 	.typewriter-text {
 		display: inline-block;
 		overflow: hidden;
-		letter-spacing: 1.5px;
-		animation: typing 1.2s steps(7, end), blink .6s step-end infinite;
+		letter-spacing: 2px;
+		animation: typing 3s steps(27, end), blink .75s step-end infinite;
 		white-space: nowrap;
-		font-size: 1.2em;
+		font-size: 5px;
 		font-weight: 700;
-		border-right: 3px solid #e17ea3;
+		border-right: 4px solid white;
 		box-sizing: border-box;
 	}
 	
 	@keyframes typing {
-		from { width: 0ch; }
-		to { width: 6ch; }
+		from { 
+			width: 0% 
+		}
+		to { 
+			width: 100% 
+		}
 	}
 	
 	@keyframes blink {
@@ -4362,9 +4041,9 @@ input, select, textarea {
 	}
 
 	.name {
-		font-family: 'Quicksand', 'Poppins', 'Comic Sans MS', cursive, sans-serif;
-		margin-bottom: 1.2em;
-		display: block;
+		font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+		padding-bottom: 0%;
+		margin-bottom: 0%;
 	}
 
 	.python {
