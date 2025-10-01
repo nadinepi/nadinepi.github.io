@@ -1,8 +1,20 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
-  <!-- much lighter pink background for better emoji contrast -->
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" role="img" aria-label="flower">
+  <!-- pale rounded background -->
   <rect width="100%" height="100%" fill="#fff1f6" rx="12" />
-  <!-- subtle inner circle (slightly off-white) to help the emoji pop -->
-  <circle cx="32" cy="32" r="18" fill="#fffafa" />
-  <!-- larger emoji for better visibility in small favicon sizes -->
-  <text x="50%" y="50%" font-size="44" text-anchor="middle" dominant-baseline="central">🌸</text>
+  <!-- flower group centered and slightly scaled up -->
+  <g transform="translate(32,32) scale(1.12)">
+    <!-- petals (5) -->
+    <g fill="#f6a6c5" stroke="none">
+  <!-- slightly longer/wider petals (rx/ry increased, moved further out) -->
+  <ellipse rx="11" ry="9" transform="rotate(0) translate(0,-16)" />
+  <ellipse rx="11" ry="9" transform="rotate(72) translate(0,-16)" />
+  <ellipse rx="11" ry="9" transform="rotate(144) translate(0,-16)" />
+  <ellipse rx="11" ry="9" transform="rotate(216) translate(0,-16)" />
+  <ellipse rx="11" ry="9" transform="rotate(288) translate(0,-16)" />
+    </g>
+    <!-- small inner ring for contrast (reduced to balance larger petals) -->
+    <circle r="5" fill="#fffafa" />
+    <!-- center dot -->
+    <circle r="2.5" fill="#d16ba5" />
+  </g>
 </svg>
