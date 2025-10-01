@@ -21,6 +21,9 @@ let hobbyCtx = null;
 
 let currentSpot = null;
 
+// Tooltip element for art hover
+let artTooltip = null;
+
 function drawRoom(ctx) {
   // Allow calling without passing ctx - use shared hobbyCtx
   ctx = ctx || hobbyCtx;
@@ -81,6 +84,8 @@ function drawRoom(ctx) {
       }
     }
   }
+  // Hide tooltip if not hovering
+  if (artTooltip) artTooltip.style.display = 'none';
 }
 
 function checkSpot() {
@@ -146,6 +151,189 @@ document.addEventListener('DOMContentLoaded', function() {
   hobbyCtx = ctx;
   drawRoom();
   checkSpot();
+
+  // Tooltip for art
+  artTooltip = document.createElement('div');
+  artTooltip.style.position = 'fixed';
+  artTooltip.style.pointerEvents = 'none';
+  artTooltip.style.background = '#fff9fc';
+  artTooltip.style.color = '#d16ba5';
+  artTooltip.style.border = '1px solid #d16ba5';
+  artTooltip.style.borderRadius = '8px';
+  artTooltip.style.padding = '6px 12px';
+  artTooltip.style.fontFamily = 'Quicksand, sans-serif';
+  artTooltip.style.fontSize = '1rem';
+  artTooltip.style.boxShadow = '0 2px 8px rgba(209,107,165,0.12)';
+  artTooltip.style.zIndex = 1000;
+  artTooltip.style.display = 'none';
+  document.body.appendChild(artTooltip);
+
+  // Modal for art
+  let artModal = document.createElement('div');
+  artModal.style.position = 'fixed';
+  artModal.style.left = 0;
+  artModal.style.top = 0;
+  artModal.style.width = '100vw';
+  artModal.style.height = '100vh';
+  artModal.style.background = 'rgba(255, 249, 252, 0.96)';
+  artModal.style.display = 'none';
+  artModal.style.alignItems = 'center';
+  artModal.style.justifyContent = 'center';
+  artModal.style.zIndex = 2000;
+  artModal.style.flexDirection = 'column';
+  artModal.style.backdropFilter = 'blur(2px)';
+  artModal.tabIndex = -1;
+  artModal.style.transition = 'opacity 0.2s';
+  artModal.style.fontFamily = 'Quicksand, sans-serif';
+  artModal.style.textAlign = 'center';
+  artModal.style.padding = '32px 0 0 0';
+  artModal.style.boxSizing = 'border-box';
+  artModal.style.overflowY = 'auto';
+  artModal.style.opacity = 0;
+  artModal.style.pointerEvents = 'none';
+  artModal.style.outline = 'none';
+  artModal.style.userSelect = 'none';
+  artModal.style.cursor = 'default';
+  artModal.style.gap = '24px';
+  artModal.style.flexDirection = 'column';
+  artModal.style.display = 'flex';
+  // Inner content
+  let artModalImg = document.createElement('img');
+  artModalImg.style.maxWidth = '80vw';
+  artModalImg.style.maxHeight = '60vh';
+  artModalImg.style.borderRadius = '16px';
+  artModalImg.style.boxShadow = '0 4px 32px rgba(209,107,165,0.18)';
+  artModalImg.style.margin = '0 auto 16px auto';
+  artModalImg.alt = '';
+  let artModalTitle = document.createElement('div');
+  artModalTitle.style.fontSize = '1.3rem';
+  artModalTitle.style.color = '#d16ba5';
+  artModalTitle.style.marginBottom = '12px';
+  let artModalClose = document.createElement('button');
+  artModalClose.textContent = 'close';
+  artModalClose.style.background = '#fff9fc';
+  artModalClose.style.color = '#d16ba5';
+  artModalClose.style.border = '1px solid #d16ba5';
+  artModalClose.style.borderRadius = '8px';
+  artModalClose.style.padding = '8px 20px';
+  artModalClose.style.fontFamily = 'Quicksand, sans-serif';
+  artModalClose.style.fontSize = '1rem';
+  artModalClose.style.cursor = 'pointer';
+  artModalClose.style.margin = '0 auto';
+  artModalClose.style.display = 'block';
+  artModalClose.addEventListener('click', closeArtModal);
+  artModal.appendChild(artModalImg);
+  artModal.appendChild(artModalTitle);
+  artModal.appendChild(artModalClose);
+  document.body.appendChild(artModal);
+
+  function openArtModal(spot) {
+    artModalImg.src = spot.artSrc;
+    artModalImg.alt = spot.artTitle;
+    artModalTitle.textContent = spot.artTitle;
+    artModal.style.display = 'flex';
+    setTimeout(() => {
+      artModal.style.opacity = 1;
+      artModal.style.pointerEvents = 'auto';
+      artModal.focus();
+    }, 10);
+    document.body.style.overflow = 'hidden';
+  }
+  function closeArtModal() {
+    artModal.style.opacity = 0;
+    artModal.style.pointerEvents = 'none';
+    setTimeout(() => {
+      artModal.style.display = 'none';
+      document.body.style.overflow = '';
+    }, 200);
+  }
+  artModal.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' || e.key === 'Enter' || e.key === ' ') closeArtModal();
+  });
+
+  // Click/keyboard on art image in canvas
+  function getArtSpotAt(mx, my) {
+    for (const spot of room.spots) {
+      if (!spot.artTitle) continue;
+      const sx = spot.x;
+      const sy = spot.y;
+      const sw = spot.size;
+      const sh = spot.size;
+      if (mx >= sx && mx <= sx + sw && my >= sy && my <= sy + sh) {
+        return spot;
+      }
+    }
+    return null;
+  }
+  canvas.addEventListener('click', function(e) {
+    const rect = canvas.getBoundingClientRect();
+    const mx = (e.clientX - rect.left) * (room.width / rect.width);
+    const my = (e.clientY - rect.top) * (room.height / rect.height);
+    const spot = getArtSpotAt(mx, my);
+    if (spot) {
+      openArtModal(spot);
+    }
+  });
+  // Keyboard accessibility: Enter/Space opens modal if hovered
+  canvas.addEventListener('keydown', function(e) {
+    if (!['Enter', ' '].includes(e.key)) return;
+    // Use last hovered art spot
+    if (window.lastHoveredArtSpot) {
+      openArtModal(window.lastHoveredArtSpot);
+    }
+  });
+  // Track last hovered art spot for keyboard
+  canvas.addEventListener('mousemove', function(e) {
+    const rect = canvas.getBoundingClientRect();
+    const mx = (e.clientX - rect.left) * (room.width / rect.width);
+    const my = (e.clientY - rect.top) * (room.height / rect.height);
+    window.lastHoveredArtSpot = getArtSpotAt(mx, my);
+  });
+  // Close modal on overlay click (not image)
+  artModal.addEventListener('click', function(e) {
+    if (e.target === artModal) closeArtModal();
+  });
+
+  // Accessibility: trap focus in modal
+  artModal.addEventListener('focusout', function(e) {
+    if (!artModal.contains(e.relatedTarget)) {
+      setTimeout(() => artModal.focus(), 0);
+    }
+  });
+
+  // Mouse move for hover detection
+  canvas.addEventListener('mousemove', function(e) {
+    const rect = canvas.getBoundingClientRect();
+    const dpr = window.devicePixelRatio || 1;
+    // Mouse position in canvas coordinates
+    const mx = (e.clientX - rect.left) * (room.width / rect.width);
+    const my = (e.clientY - rect.top) * (room.height / rect.height);
+    let found = null;
+    for (const spot of room.spots) {
+      if (!spot.artTitle) continue;
+      const sx = spot.x;
+      const sy = spot.y;
+      const sw = spot.size;
+      const sh = spot.size;
+      if (mx >= sx && mx <= sx + sw && my >= sy && my <= sy + sh) {
+        found = spot;
+        break;
+      }
+    }
+    if (found) {
+      artTooltip.textContent = found.artTitle;
+      artTooltip.style.display = 'block';
+      artTooltip.style.left = e.clientX + 12 + 'px';
+      artTooltip.style.top = e.clientY + 8 + 'px';
+    } else {
+      artTooltip.style.display = 'none';
+    }
+  });
+
+  // Hide tooltip on mouse leave
+  canvas.addEventListener('mouseleave', function() {
+    artTooltip.style.display = 'none';
+  });
 
   let controlsEnabled = false;
   const overlay = document.getElementById('hobby-room-overlay');
