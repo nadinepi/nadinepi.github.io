@@ -155,15 +155,11 @@
 				$img = $image.find('img'),
 				x;
 
-			// Assign image.
-			$image.css('background-image', 'url(' + $img.attr('src') + ')');
-
-			// Set background position.
-			if (x = $img.data('position'))
-				$image.css('background-position', x);
-
-			// Hide <img>.
-			$img.hide();
+			// Note: previously this script copied the <img> into the container
+			// background and hid the original <img>. That caused duplication and
+			// conflict with circular styling. We now keep the <img> visible and
+			// let CSS control presentation.
+			$img.show();
 
 		});
 

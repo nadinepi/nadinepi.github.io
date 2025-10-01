@@ -298,6 +298,39 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 
+  // Mouse move for hover detection
+  canvas.addEventListener('mousemove', function(e) {
+    const rect = canvas.getBoundingClientRect();
+    const dpr = window.devicePixelRatio || 1;
+    // Mouse position in canvas coordinates
+    const mx = (e.clientX - rect.left) * (room.width / rect.width);
+    const my = (e.clientY - rect.top) * (room.height / rect.height);
+    let found = null;
+    for (const spot of room.spots) {
+      if (!spot.artTitle) continue;
+      const sx = spot.x;
+      const sy = spot.y;
+      const sw = spot.size;
+      const sh = spot.size;
+      if (mx >= sx && mx <= sx + sw && my >= sy && my <= sy + sh) {
+        found = spot;
+        break;
+      }
+    }
+    if (found) {
+      artTooltip.textContent = found.artTitle;
+      artTooltip.style.display = 'block';
+      artTooltip.style.left = e.clientX + 12 + 'px';
+      artTooltip.style.top = e.clientY + 8 + 'px';
+    } else {
+      artTooltip.style.display = 'none';
+    }
+  });
+
+  // Hide tooltip on mouse leave
+  canvas.addEventListener('mouseleave', function() {
+    artTooltip.style.display = 'none';
+  });
 
   let controlsEnabled = false;
   const overlay = document.getElementById('hobby-room-overlay');
