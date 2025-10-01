@@ -122,10 +122,12 @@ document.addEventListener('DOMContentLoaded', function() {
   if (!canvas) return;
   // HiDPI / retina support: set internal pixel size and scale context
   const dpr = window.devicePixelRatio || 1;
+  // Internal pixel buffer (keeps drawing crisp on HiDPI)
   canvas.width = Math.round(room.width * dpr);
   canvas.height = Math.round(room.height * dpr);
-  canvas.style.width = room.width + 'px';
-  canvas.style.height = room.height + 'px';
+  // But keep the displayed size responsive to the wrapper
+  canvas.style.width = '100%';
+  canvas.style.height = '100%';
   const ctx = canvas.getContext('2d');
   // reset then scale
   ctx.setTransform(1, 0, 0, 1, 0, 0);
