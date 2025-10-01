@@ -2,6 +2,7 @@
   <!-- much lighter pink background for better emoji contrast -->
   <rect width="100%" height="100%" fill="#fff1f6" rx="12" />
   <!-- subtle inner circle (slightly off-white) to help the emoji pop -->
-  <circle cx="32" cy="32" r="20" fill="#fffafa" />
-  <text x="50%" y="50%" font-size="34" text-anchor="middle" dominant-baseline="central">🌸</text>
+  <circle cx="32" cy="32" r="18" fill="#fffafa" />
+  <!-- larger emoji for better visibility in small favicon sizes -->
+  <text x="50%" y="50%" font-size="44" text-anchor="middle" dominant-baseline="central">🌸</text>
 </svg>
