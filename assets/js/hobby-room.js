@@ -153,55 +153,6 @@ document.addEventListener('DOMContentLoaded', function() {
   ctx.setTransform(1, 0, 0, 1, 0, 0);
   ctx.scale(dpr, dpr);
   ctx.imageSmoothingEnabled = false;
-  hobbyCtx = ctx;
-  drawRoom();
-  checkSpot();
-
-  // Tooltip for art
-  artTooltip = document.createElement('div');
-  artTooltip.style.position = 'fixed';
-  artTooltip.style.pointerEvents = 'none';
-  artTooltip.style.background = '#fff9fc';
-  artTooltip.style.color = '#d16ba5';
-  artTooltip.style.border = '1px solid #d16ba5';
-  artTooltip.style.borderRadius = '8px';
-  artTooltip.style.padding = '6px 12px';
-  artTooltip.style.fontFamily = 'Quicksand, sans-serif';
-  artTooltip.style.fontSize = '1rem';
-  artTooltip.style.boxShadow = '0 2px 8px rgba(209,107,165,0.12)';
-  artTooltip.style.zIndex = 1000;
-  artTooltip.style.display = 'none';
-  document.body.appendChild(artTooltip);
-
-  // Modal for art
-  let artModal = document.createElement('div');
-  artModal.style.position = 'fixed';
-  artModal.style.left = 0;
-  artModal.style.top = 0;
-  artModal.style.width = '100vw';
-  artModal.style.height = '100vh';
-  artModal.style.background = 'rgba(255, 249, 252, 0.96)';
-  artModal.style.display = 'none';
-  artModal.style.alignItems = 'center';
-  artModal.style.justifyContent = 'center';
-  artModal.style.zIndex = 2000;
-  artModal.style.flexDirection = 'column';
-  artModal.style.backdropFilter = 'blur(2px)';
-  artModal.tabIndex = -1;
-  artModal.style.transition = 'opacity 0.2s';
-  artModal.style.fontFamily = 'Quicksand, sans-serif';
-  artModal.style.textAlign = 'center';
-  artModal.style.padding = '32px 0 0 0';
-  artModal.style.boxSizing = 'border-box';
-  artModal.style.overflowY = 'auto';
-  artModal.style.opacity = 0;
-  artModal.style.pointerEvents = 'none';
-  artModal.style.outline = 'none';
-  artModal.style.userSelect = 'none';
-  artModal.style.cursor = 'default';
-  artModal.style.gap = '24px';
-  artModal.style.flexDirection = 'column';
-  artModal.style.display = 'flex';
   // Inner content
   let artModalImg = document.createElement('img');
   artModalImg.style.maxWidth = '80vw';
