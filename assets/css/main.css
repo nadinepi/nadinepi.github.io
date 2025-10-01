@@ -3780,7 +3780,7 @@ input, select, textarea {
 	#sidebar {
 		padding: 2.5em 2.5em 0.5em 2.5em ;
 	/* very pale pink sidebar (lighter than the home page) */
-	background: #ffdeee;
+	background: #ffebf4;
 		/* remove rounded corners per user request to avoid corner artifact */
 		border-top-right-radius: 0;
 		border-bottom-right-radius: 0;
