@@ -257,6 +257,8 @@ document.addEventListener('DOMContentLoaded', function() {
       overlay.style.display = 'none';
       startBtn.style.display = 'none';
       canvas.focus();
+      drawRoom();
+      checkSpot();
     });
   } else {
     controlsEnabled = true;
