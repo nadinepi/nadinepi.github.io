@@ -6,12 +6,12 @@ const room = {
   height: 481,
   spots: [
     { name: 'skateboard', x: 138, y: 193, img: 'hobby-skateboard.png', blurb: 'I love skateboarding whenever I can! Malmö is a great place for it.', size: 138 },
-    { name: 'climbing', x: 371, y: 110, img: 'hobby-climbing.png', blurb: 'Bouldering is a fun way to stay active, especially in the winter when it\'s too cold to skate outside.', size: 83 },
-    { name: 'art', x: 688, y: 234, img: 'hobby-art.png', blurb: 'I enjoy painting and drawing in my free time, especially landscapes.', size: 89 },
+    { name: 'climbing', x: 371, y: 90, img: 'hobby-climbing.png', blurb: 'Bouldering is a fun way to stay active, especially in the winter when it\'s too cold to skate outside.', size: 83 },
+    { name: 'art', x: 600, y: 234, img: 'hobby-art.png', blurb: 'I enjoy painting and drawing in my free time, especially landscapes.', size: 89 },
     // Artworks on the right side of the room
-    { name: 'iceland', x: 900, y: 80, img: 'iceland.JPG', blurb: 'oil painting - waterfall in iceland', size: 90, artTitle: 'Waterfall in Iceland', artSrc: 'images/iceland.JPG' },
+    { name: 'iceland', x: 700, y: 80, img: 'iceland.JPG', blurb: 'oil painting - waterfall in iceland', size: 90, artTitle: 'Waterfall in Iceland', artSrc: 'images/iceland.JPG' },
     { name: 'rose', x: 1000, y: 200, img: 'rose.png', blurb: 'sketch - rose', size: 70, artTitle: 'Rose Sketch', artSrc: 'images/rose.png' },
-    { name: 'bobross', x: 950, y: 320, img: 'bobross.jpg', blurb: 'oil painting - the grandeur of summer (bob ross tutorial)', size: 90, artTitle: 'The Grandeur of Summer', artSrc: 'images/bobross.jpg' }
+    { name: 'bobross', x: 800, y: 320, img: 'bobross.jpg', blurb: 'oil painting - the grandeur of summer (i followed a bob ross tutorial :) )', size: 90, artTitle: 'The Grandeur of Summer', artSrc: 'images/bobross.jpg' }
   ],
   character: { x: 69, y: 275, img: 'hobby-character.png', size: 193 }
 };
